@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://5x7sodyd2cpj"]
+
+[ext_resource type="Script" uid="uid://3ktvrkrtvfb5" path="res://Player/player.gd" id="1_2slf2"]
+[ext_resource type="Texture2D" uid="uid://3dvf4dj6pdp3" path="res://guy2.png" id="1_3oco4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jco6x"]
+transparency = 1
+albedo_texture = ExtResource("1_3oco4")
+
+[sub_resource type="QuadMesh" id="QuadMesh_2slf2"]
+material = SubResource("StandardMaterial3D_jco6x")
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_2slf2")
+
+[node name="Character" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.55944264, 0, 0, 0, 2.0214114, 0, 0, 0, 1, 0, 1.0293868, 0)
+mesh = SubResource("QuadMesh_2slf2")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044168353, 1.0919124, 1.9517847)
+cull_mask = 1048573

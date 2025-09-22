@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://47wtvxxe874k"]
+
+[ext_resource type="Script" uid="uid://cosle6xusvoc3" path="res://flow-game/flow_cell.gd" id="1_hd6fs"]
+
+[node name="FlowCell" type="Control" node_paths=PackedStringArray("colorRect")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 80.0
+offset_bottom = 80.0
+script = ExtResource("1_hd6fs")
+colorRect = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 80.0
+offset_bottom = 80.0
+color = Color(0, 0, 0, 1)
+
+[connection signal="mouse_entered" from="ColorRect" to="." method="_on_color_rect_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]

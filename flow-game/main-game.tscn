@@ -1,0 +1,110 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjn3tu0mw2ia5"]
+
+[ext_resource type="Script" uid="uid://c4l2c2msr5wls" path="res://flow-game/flow_game.gd" id="1_bre1v"]
+[ext_resource type="PackedScene" uid="uid://47wtvxxe874k" path="res://flow-game/flow_cell.tscn" id="1_snk68"]
+
+[node name="MainGame" type="CanvasLayer" node_paths=PackedStringArray("gridContainer")]
+script = ExtResource("1_bre1v")
+gridContainer = NodePath("GridContainer")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -159.0
+offset_top = -120.0
+offset_right = 159.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 80
+theme_override_constants/v_separation = 80
+columns = 7
+
+[node name="FlowCell" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell2" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell3" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell4" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell5" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell6" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell7" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell8" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell9" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell10" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell11" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell12" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+cellType = 1
+cellColor = 1
+
+[node name="FlowCell13" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell14" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell15" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell16" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell17" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell18" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell19" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell20" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell21" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell22" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell23" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell24" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell25" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell26" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell27" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2
+
+[node name="FlowCell28" parent="GridContainer" instance=ExtResource("1_snk68")]
+layout_mode = 2

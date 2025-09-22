@@ -1,0 +1,101 @@
+[gd_scene load_steps=13 format=3 uid="uid://bxq6lb6nu53ob"]
+
+[ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_iwyjt"]
+[ext_resource type="PackedScene" uid="uid://bua23usu60e1i" path="res://Window 02 GLB.glb" id="3_3dcgm"]
+[ext_resource type="Texture2D" uid="uid://dbdss0cywefdm" path="res://wallpaper.png" id="4_1vwtb"]
+[ext_resource type="PackedScene" uid="uid://5x7sodyd2cpj" path="res://Player/player.tscn" id="4_iwyjt"]
+[ext_resource type="Texture2D" uid="uid://c0mb2grv1vm5k" path="res://CatumetGamesFurniture.png" id="5_ksxe6"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0l2xm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r10vh"]
+albedo_texture = ExtResource("4_1vwtb")
+uv1_scale = Vector3(-7.095, -7.095, -7.095)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xjn8"]
+albedo_texture = ExtResource("4_1vwtb")
+uv1_scale = Vector3(-0.985, -0.985, -0.985)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iwyjt"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.2701825, 0.27605027, 0.28779808, 1)
+
+[sub_resource type="Sky" id="Sky_ksxe6"]
+sky_material = SubResource("ProceduralSkyMaterial_iwyjt")
+
+[sub_resource type="Environment" id="Environment_3dcgm"]
+background_mode = 2
+sky = SubResource("Sky_ksxe6")
+adjustment_saturation = 0.01
+
+[node name="Node3D" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 0, 0)
+mesh = SubResource("BoxMesh_1exhc")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 5.14209, 0)
+mesh = SubResource("BoxMesh_1exhc")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="Wall" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3178887)
+
+[node name="Window 02 GLB" parent="Wall" instance=ExtResource("3_3dcgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20427513, 2.4257517, -0.31829453)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -4.982654, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 4.48268, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 0.47155, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 4.4557676, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="Player" parent="." instance=ExtResource("4_iwyjt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20391083, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3dcgm")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5069783, 4.0660324, 1.4162049)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -2.817703, 1.4172146, -2.4442143)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
+
+[node name="Sprite3D2" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.335869, 0.80964446, 0.28361773)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
