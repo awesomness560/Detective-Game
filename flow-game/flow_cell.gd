@@ -8,7 +8,8 @@ enum CELL_TYPE {
 
 enum COLORS {
 	BLACK,
-	BLUE
+	BLUE,
+	GREEN
 }
 
 @export var colorRect : ColorRect
@@ -22,6 +23,11 @@ var cellPosition : Vector2
 ##with a custom color, aka, not be highlighted
 ##when hovering over it (there is already a color here)
 var isHighlighted : bool = false
+
+# New variables for permanent connections
+var isPermanentConnection : bool = false
+var permanentConnectionColor : COLORS = COLORS.BLACK
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	colorRect.color = getActualColor()
@@ -29,6 +35,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+func handleResetInput():
+	# Only allow reset if this cell is part of a permanent connection
+	if isPermanentConnection:
+		FlowManager.resetConnectionContainingCell(self)
 
 func highlightNode(color : Color):
 	isHighlighted = true
@@ -41,14 +52,12 @@ func resetHighlight():
 func _on_color_rect_mouse_entered() -> void:
 	FlowManager.mouseEnteredCell(self)
 	FlowManager.currentlyHoveredCell = self
-	if isHighlighted or cellType == CELL_TYPE.ORIGIN:
+	if isHighlighted or cellType == CELL_TYPE.ORIGIN or isPermanentConnection:
 		return
 	colorRect.color = Color.RED
 
 func _on_color_rect_mouse_exited() -> void:
-	#if FlowManager.currentlyHoveredCell == self:
-		#FlowManager.currentlyHoveredCell = null
-	if isHighlighted or cellType == CELL_TYPE.ORIGIN:
+	if isHighlighted or cellType == CELL_TYPE.ORIGIN or isPermanentConnection:
 		return
 	colorRect.color = getActualColor()
 
@@ -58,4 +67,6 @@ func getActualColor() -> Color:
 			return Color.BLACK
 		COLORS.BLUE:
 			return Color.AQUA
+		COLORS.GREEN:
+			return Color.GREEN
 	return Color.PURPLE

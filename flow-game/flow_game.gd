@@ -5,15 +5,15 @@ class_name FlowGame
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var row : int = 0
-	var col : int = 0
+	var col : int = 0  # x-coordinate
+	var row : int = 0  # y-coordinate
 	
 	for child in gridContainer.get_children():
-		if row >= gridContainer.columns:
-			row = 0
-			col += 1
-		
 		if child is FlowCell:
-			child.cellPosition = Vector2(row, col)
+			child.cellPosition = Vector2(col, row)
+			FlowManager.registerCell(child)  # Register the cell with FlowManager
 		
-		row += 1
+		col += 1
+		if col >= gridContainer.columns:
+			col = 0
+			row += 1
