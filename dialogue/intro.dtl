@@ -1,0 +1,34 @@
+joshua_russo: Hey. [pause=0.5] [b]Hey.[/b] [pause=0.4] What the hell are you doing here?
+[wait time="1.0" hide_text="false" skippable="true"]
+joshua_russo: You’re not supposed to be here.
+# Wheezing Audio
+joshua_russo: Did you think this was funny? You getting a good laugh out of this?
+joshua_russo: Talk. [pause=0.3] To. [pause=0.3] Me.
+player: [speed=0.5]I can't.[pause=0.2].[pause=0.2].[pause=0.6] think.
+joshua_russo: Can’t think?
+joshua_russo: Who.[pause=0.8].[pause=0.8].[pause=0.8]
+[wait time="1.0" hide_text="false"]
+joshua_russo: Let it all come back to you. Think.
+[wait time="1.5" skippable="true"]
+player: What’s going on? [pause=1] Who are you?
+[wait time="1.0"]
+# As is custom by now, he stares, this time taking a big, deep breath of air.
+joshua_russo: Russo. [pause=1] My name is Joshua Russo. [pause=0.8] I’m your friend.
+# You shut your eyes and think to yourself. 
+player: [i]Russo.[pause=0.3].[pause=0.3].[pause=0.3] Russo.[pause=0.3].[pause=0.3].[pause=0.3] [/i]
+# All that comes, however, is the darkness of your eyelids.
+player: I don’t know anyone named Russo.
+joshua_russo: [speed=3].[pause=0.2].[pause=0.2].[pause=0.2]Really now?
+player: I.[pause=0.3].[pause=0.3].[pause=0.3]
+joshua_russo: Fine.[pause=0.5] It is what it is.[pause=0.5] Let me have a look at you.
+# He gets up, walking around the chair, looking at you from different angles. At one point he commands you to stand up, which you are rather quick to do. He tells you to sit down, and then thinks to himself. He continues.
+joshua_russo: If you don’t remember me, what [pause=0.4]D[pause=0.3]O[pause=0.3] you remember?
+player: ...
+joshua_russo: Well?
+player: [speed=3].[pause=0.1].[pause=0.1].[pause=0.1]Just a name.[pause=0.2] It’s-
+[text_input text="" var="playerName"]
+[wait time="1.0"]
+joshua_russo: Do you know whose name that is?
+[wait time="0.5"]
+set {russoName} = "Russo"
+joshua_russo: It’s YOUR name! I’m Russo, and you’re {playerName}!
