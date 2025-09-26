@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bmx6lav7x2d3n"]
+
+[resource]
+blend_mode = 1
+shading_mode = 2

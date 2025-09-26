@@ -1,0 +1,28 @@
+[gd_resource type="StandardMaterial3D" load_steps=4 format=3 uid="uid://dt5k0cf25fcfq"]
+
+[ext_resource type="Texture2D" uid="uid://lxgeikhhisea" path="res://dark-wood/dark_wooden_planks_diff_4k.jpg" id="1_sx8j6"]
+[ext_resource type="Texture2D" uid="uid://djpc2ef6npota" path="res://dark-wood/dark_wooden_planks_rough_4k.exr" id="2_p62ap"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sx8j6"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.018
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
+[resource]
+next_pass = SubResource("StandardMaterial3D_sx8j6")
+shading_mode = 2
+albedo_texture = ExtResource("1_sx8j6")
+roughness_texture = ExtResource("2_p62ap")
+roughness_texture_channel = 4
+uv1_scale = Vector3(20.135, 20.135, 20.135)
+grow_amount = 1.314
+stencil_mode = 1
+stencil_flags = 2
+stencil_outline_thickness = 0.018
