@@ -1,45 +1,67 @@
 extends Area3D
-# Godot 4.5
+
 
 @export var unlock_message := "Shelf unlocked!"
+@export var hintEnabled : bool = true
+@export var hintColor : Color
+@export var hintPulsingDuration : float = 1
+@export var sprite3D : Sprite3D
+@export var promptLabel : Label3D
 
-var _player_in := false
+var tween : Tween
+var originalColor : Color
+
+var _player_in := false : set = setPlayerIn
 var _unlocked := false
-
-@onready var _shelf := $ShelfSprite
-@onready var _glow := $ShelfGlow
-@onready var _prompt := $PromptLabel
-@onready var _ui := get_tree().get_first_node_in_group("unlock_ui") as Control
+var canBeFound = true : set = setCanBeFound
 
 func _ready() -> void:
-	# Start gray
-	_shelf.modulate = Color(0.25, 0.25, 0.25, 1.0)
-	_glow.visible = false
-	_prompt.visible = false
-
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
-
-func _on_body_entered(body: Node) -> void:
-	if body.is_in_group("player") and not _unlocked:
-		_player_in = true
-		_glow.visible = true
-		_prompt.visible = true
-
-func _on_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
-		_player_in = false
-		_glow.visible = false
-		_prompt.visible = false
+	originalColor = sprite3D.modulate
+	canBeFound = true
+	if hintEnabled == false:
+		hintColor = originalColor
+	#canBeFound = true
+	area_entered.connect(onAreaEntered)
+	area_exited.connect(onAreaExitied)
 
 func _unhandled_input(event: InputEvent) -> void:
-	if _player_in and not _unlocked and event.is_action_pressed("interact"):
-		_unlocked = true
-		_shelf.modulate = Color(1, 1, 1, 1)  # restore full color
-		_glow.visible = false
-		_prompt.visible = false
-		_notify(unlock_message)
+	if event.is_action_pressed("interact") and _player_in:
+		_player_in = false
+		canBeFound = false
+		Globals.unlocked.emit(unlock_message)
 
-func _notify(msg: String) -> void:
-	if _ui and _ui.has_method("show_unlock"):
-		_ui.call("show_unlock", msg)
+func setCanBeFound(state : bool):
+	if tween:
+		tween.kill()
+	
+	if state:
+		tween = create_tween()
+		tween.tween_property(sprite3D, "modulate", hintColor, hintPulsingDuration)
+		tween.tween_property(sprite3D, "modulate", originalColor, hintPulsingDuration)
+		tween.set_loops()
+		sprite3D.shaded = false
+	else:
+		sprite3D.shaded = true
+		sprite3D.modulate = originalColor
+	
+	canBeFound = state
+
+func setPlayerIn(state : bool):
+	promptLabel.visible = state
+	if state:
+		if tween:
+			tween.pause()
+		sprite3D.modulate = hintColor
+	else:
+		if tween:
+			tween.play()
+	
+	_player_in = state
+
+func onAreaEntered(area : Area3D):
+	if area.is_in_group("player") and canBeFound:
+		_player_in = true
+
+func onAreaExitied(area : Area3D):
+	if area.is_in_group("player") and canBeFound:
+		_player_in = false

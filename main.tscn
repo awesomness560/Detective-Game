@@ -1,14 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://bxq6lb6nu53ob"]
+[gd_scene load_steps=16 format=3 uid="uid://bxq6lb6nu53ob"]
 
 [ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_iwyjt"]
 [ext_resource type="PackedScene" uid="uid://bua23usu60e1i" path="res://Window 02 GLB.glb" id="3_3dcgm"]
 [ext_resource type="Texture2D" uid="uid://dbdss0cywefdm" path="res://wallpaper.png" id="4_1vwtb"]
-[ext_resource type="Texture2D" uid="uid://3dvf4dj6pdp3" path="res://guy2.png" id="5_4c57u"]
 [ext_resource type="Texture2D" uid="uid://c0mb2grv1vm5k" path="res://CatumetGamesFurniture.png" id="5_ksxe6"]
-[ext_resource type="Script" uid="uid://kc6ridqotiu6" path="res://discover_feature.gd" id="6_272bh"]
-[ext_resource type="Script" uid="uid://3ktvrkrtvfb5" path="res://Player/player.gd" id="6_efxa6"]
 [ext_resource type="Script" uid="uid://cph251i7ro8gt" path="res://UnlockUI.gd" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://dpsx0yfrpe1js" path="res://Unlockable.gd" id="7_kek77"]
+[ext_resource type="PackedScene" uid="uid://5x7sodyd2cpj" path="res://Player/player.tscn" id="8_5vw27"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
 
@@ -21,8 +19,6 @@ uv1_scale = Vector3(-7.095, -7.095, -7.095)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xjn8"]
 albedo_texture = ExtResource("4_1vwtb")
 uv1_scale = Vector3(-0.985, -0.985, -0.985)
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dg77c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iwyjt"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -81,21 +77,6 @@ mesh = SubResource("BoxMesh_0l2xm")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
 
-[node name="main_Player" type="CharacterBody3D" parent="." groups=["player"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20391083, 0)
-script = ExtResource("6_efxa6")
-
-[node name="PlayerSprite" type="Sprite3D" parent="main_Player"]
-transform = Transform3D(0.20149148, 0, 0, 0, 0.20034407, 0, 0, 0, 1, -0.008736312, 1.0261123, 0.011093378)
-texture = ExtResource("5_4c57u")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="main_Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08276367, 1.1048888, 0.1164906)
-shape = SubResource("CapsuleShape3D_dg77c")
-
-[node name="Camera3D" type="Camera3D" parent="main_Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.047404528, 1.0711881, 1.9252405)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3dcgm")
 
@@ -107,42 +88,32 @@ light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
 light_energy = 2.0
 light_indirect_energy = 4.0
 
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -6.8782625, 4.4722147, -1.0455341)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
 [node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -6.3903484, 1.2589021, -2.6673539)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
 shaded = true
 texture = ExtResource("5_ksxe6")
 region_enabled = true
 region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
-script = ExtResource("6_272bh")
 
-[node name="UnlockableShelf" type="Area3D" parent="Sprite3D"]
+[node name="Unlockable" type="Area3D" parent="Sprite3D" node_paths=PackedStringArray("sprite3D", "promptLabel")]
 script = ExtResource("7_kek77")
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/UnlockableShelf"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/Unlockable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
 shape = SubResource("BoxShape3D_kek77")
 
-[node name="ShelfSprite" type="Sprite3D" parent="Sprite3D/UnlockableShelf"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.020037651)
-modulate = Color(0.10980392, 0.10980392, 0.10980392, 0.8)
-shaded = true
-texture = ExtResource("5_ksxe6")
-region_enabled = true
-region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
-script = ExtResource("6_272bh")
-
-[node name="ShelfGlow" type="Sprite3D" parent="Sprite3D/UnlockableShelf"]
-transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 0, 0, 0.124726295)
-visible = false
-modulate = Color(1.6461157, 0, 0.2648884, 0.4862745)
-shaded = true
-texture = ExtResource("5_ksxe6")
-region_enabled = true
-region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
-script = ExtResource("6_272bh")
-
-[node name="PromptLabel" type="Label3D" parent="Sprite3D/UnlockableShelf"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5394993, 4.2584295, 1.2501411)
+[node name="PromptLabel" type="Label3D" parent="Sprite3D/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
 visible = false
 text = "Press E to Unlock"
 font_size = 147
@@ -173,3 +144,6 @@ offset_right = 40.0
 offset_bottom = 23.0
 horizontal_alignment = 1
 script = ExtResource("7_5vw27")
+
+[node name="Player" parent="." instance=ExtResource("8_5vw27")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3750435)

@@ -18,12 +18,17 @@ config/icon="res://icon.svg"
 [autoload]
 
 FlowManager="*res://flow-game/flow_manager.gd"
+Globals="*res://Singletons/Globals.tscn"
 
 [display]
 
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[global_group]
+
+player=""
 
 [input]
 

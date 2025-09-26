@@ -1,5 +1,8 @@
 extends Label
 
+func _ready() -> void:
+	Globals.unlocked.connect(show_unlock)
+
 func show_unlock(text_to_show: String) -> void:
 	text = text_to_show
 	visible = true
