@@ -17,7 +17,7 @@ func _ready() -> void:
 	# start with room 1 by default
 	play_room_music(1)
 
-
+#hi
 func play_room_music(room_id: int) -> void:
 	if room_id == _current_room:
 		return  # already playing
