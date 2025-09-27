@@ -1,6 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bxq6lb6nu53ob"]
+[gd_scene load_steps=25 format=3 uid="uid://bxq6lb6nu53ob"]
 
+[ext_resource type="Texture2D" uid="uid://cor8u8vauics" path="res://stair-clipart-1.png" id="1_dg77c"]
 [ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_iwyjt"]
+[ext_resource type="Script" uid="uid://egitgykoyeng" path="res://Stairs.gd" id="1_ycdy4"]
 [ext_resource type="Script" uid="uid://bxvmqbkwkpce7" path="res://NPC.gd" id="2_4c57u"]
 [ext_resource type="NavigationMesh" uid="uid://dbj0jyavf1no0" path="res://navmesh.tres" id="2_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bua23usu60e1i" path="res://Window 02 GLB.glb" id="3_3dcgm"]
@@ -12,7 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://5x7sodyd2cpj" path="res://Player/player.tscn" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://cqvacnauwhwro" path="res://door.tscn" id="8_kek77"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_w48qg"]
+size = Vector3(3.393036, 3.5233154, 2.0858154)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iwyjt"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -45,35 +48,25 @@ uv1_scale = Vector3(-7.095, -7.095, -7.095)
 albedo_texture = ExtResource("4_1vwtb")
 uv1_scale = Vector3(-0.985, -0.985, -0.985)
 
+[sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
+
 [node name="Node3D" type="Node3D"]
 
-[node name="NavRegion" type="NavigationRegion3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41931403, 0)
-navigation_mesh = ExtResource("2_efxa6")
+[node name="stairs" type="Area3D" parent="."]
+script = ExtResource("1_ycdy4")
+target_location = NodePath("../Room2Spot")
+fade_rect = NodePath("../UI/ScreenFade")
 
-[node name="floor1" type="MeshInstance3D" parent="NavRegion"]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, 0)
-mesh = SubResource("BoxMesh_1exhc")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("1_iwyjt")
+[node name="target_position" type="Node3D" parent="stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0628014, 5.5448437, -1.3541117)
 
-[node name="floor2" type="MeshInstance3D" parent="NavRegion"]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, -13.009721)
-mesh = SubResource("BoxMesh_1exhc")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("1_iwyjt")
+[node name="Sprite3D" type="Sprite3D" parent="stairs"]
+transform = Transform3D(0.39999998, 0, 0, 0, 0.6123677, 0, 0, 0, 1, -6.433134, 2.8739915, -1.366298)
+texture = ExtResource("1_dg77c")
 
-[node name="floor3" type="MeshInstance3D" parent="NavRegion"]
-transform = Transform3D(25.080317, 0, 0, 0, 0.42966256, 0, 0, 0, 4.8278317, 0, -0.41931403, -28.069923)
-mesh = SubResource("BoxMesh_1exhc")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("1_iwyjt")
-
-[node name="floor4" type="MeshInstance3D" parent="NavRegion"]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, -45.255074)
-mesh = SubResource("BoxMesh_1exhc")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("1_iwyjt")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stairs"]
+transform = Transform3D(1, 0, 0, 0, 1.6447836, 0, 0, 0, 1, -6.7273116, 2.0751538, -1.3549783)
+shape = SubResource("BoxShape3D_w48qg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3dcgm")
@@ -131,14 +124,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20265174, -1.3750435)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Player"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/StaticBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009665251, 1.0819834, 0.5313529)
 shape = SubResource("BoxShape3D_5vw27")
 
 [node name="Room1Spot" type="Node3D" parent="."]
 
 [node name="Shelf" type="Sprite3D" parent="Room1Spot"]
-transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -6.3903484, 1.2589021, -2.6673539)
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -3.2948875, 1.2589021, -2.6673539)
 modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
 shaded = true
 texture = ExtResource("5_ksxe6")
@@ -510,3 +503,31 @@ transform = Transform3D(0.022999613, 0, 0, 0, 0.026190395, 0, 0, 0, 0.05614152, 
 target_location = NodePath("../../Room1Spot")
 fade_rect = NodePath("../../UI/ScreenFade")
 stairs_duration = 1.0
+
+[node name="NavRegion" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41931403, 0)
+navigation_mesh = ExtResource("2_efxa6")
+
+[node name="floor1" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="floor2" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, -13.009721)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="floor3" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.42966256, 0, 0, 0, 4.8278317, 0, -0.41931403, -28.069923)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="floor4" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, -45.255074)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
