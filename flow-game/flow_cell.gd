@@ -9,7 +9,9 @@ enum CELL_TYPE {
 enum COLORS {
 	BLACK,
 	BLUE,
-	GREEN
+	GREEN,
+	RED,
+	YELLOW
 }
 
 @export var colorRect : ColorRect
@@ -54,7 +56,7 @@ func _on_color_rect_mouse_entered() -> void:
 	FlowManager.currentlyHoveredCell = self
 	if isHighlighted or cellType == CELL_TYPE.ORIGIN or isPermanentConnection:
 		return
-	colorRect.color = Color.RED
+	colorRect.color = Color.DIM_GRAY
 
 func _on_color_rect_mouse_exited() -> void:
 	if isHighlighted or cellType == CELL_TYPE.ORIGIN or isPermanentConnection:
@@ -66,7 +68,11 @@ func getActualColor() -> Color:
 		COLORS.BLACK:
 			return Color.BLACK
 		COLORS.BLUE:
-			return Color.AQUA
+			return Color.BLUE
 		COLORS.GREEN:
-			return Color.GREEN
+			return Color.WEB_GREEN
+		COLORS.RED:
+			return Color.ORANGE_RED
+		COLORS.YELLOW:
+			return Color.YELLOW
 	return Color.PURPLE

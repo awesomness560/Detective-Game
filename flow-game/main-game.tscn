@@ -13,20 +13,20 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -240.0
-offset_top = -120.0
-offset_right = 324.0
-offset_bottom = 203.0
+offset_left = -198.0
+offset_top = -200.0
+offset_right = 198.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/h_separation = 80
 theme_override_constants/v_separation = 80
-columns = 7
+columns = 5
 
 [node name="FlowCell" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
 cellType = 1
-cellColor = 1
+cellColor = 3
 
 [node name="FlowCell2" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
@@ -40,7 +40,7 @@ layout_mode = 2
 [node name="FlowCell5" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
 cellType = 1
-cellColor = 2
+cellColor = 3
 
 [node name="FlowCell6" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
@@ -67,12 +67,16 @@ cellColor = 1
 
 [node name="FlowCell13" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
+cellType = 1
+cellColor = 4
 
 [node name="FlowCell14" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
 
 [node name="FlowCell15" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
+cellType = 1
+cellColor = 2
 
 [node name="FlowCell16" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
@@ -88,12 +92,16 @@ layout_mode = 2
 
 [node name="FlowCell20" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
+cellType = 1
+cellColor = 4
 
 [node name="FlowCell21" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
 
 [node name="FlowCell22" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
+cellType = 1
+cellColor = 2
 
 [node name="FlowCell23" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
@@ -103,14 +111,5 @@ layout_mode = 2
 
 [node name="FlowCell25" parent="GridContainer" instance=ExtResource("1_snk68")]
 layout_mode = 2
-
-[node name="FlowCell26" parent="GridContainer" instance=ExtResource("1_snk68")]
-layout_mode = 2
-
-[node name="FlowCell27" parent="GridContainer" instance=ExtResource("1_snk68")]
-layout_mode = 2
-
-[node name="FlowCell28" parent="GridContainer" instance=ExtResource("1_snk68")]
-layout_mode = 2
 cellType = 1
-cellColor = 2
+cellColor = 1

@@ -1,6 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://47wtvxxe874k"]
+[gd_scene load_steps=4 format=3 uid="uid://47wtvxxe874k"]
 
 [ext_resource type="Script" uid="uid://cosle6xusvoc3" path="res://flow-game/flow_cell.gd" id="1_hd6fs"]
+[ext_resource type="Shader" uid="uid://kt5lt1hbnh7k" path="res://flow-game/flow_cell.gdshader" id="2_q1up7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hj20h"]
+shader = ExtResource("2_q1up7")
+shader_parameter/border_width = 0.0050000002375
+shader_parameter/border_color = Color(1, 1, 1, 1)
 
 [node name="FlowCell" type="Control" node_paths=PackedStringArray("colorRect")]
 layout_mode = 3
@@ -11,6 +17,7 @@ script = ExtResource("1_hd6fs")
 colorRect = NodePath("ColorRect")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_hj20h")
 layout_mode = 0
 offset_right = 80.0
 offset_bottom = 80.0
