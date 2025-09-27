@@ -1,0 +1,417 @@
+[gd_scene load_steps=20 format=3 uid="uid://w1iwff1yggpr"]
+
+[ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_yv058"]
+[ext_resource type="Texture2D" uid="uid://dbdss0cywefdm" path="res://wallpaper.png" id="3_xokmy"]
+[ext_resource type="Texture2D" uid="uid://c0mb2grv1vm5k" path="res://CatumetGamesFurniture.png" id="4_atdb8"]
+[ext_resource type="Shader" uid="uid://do0ho41oss6m2" path="res://levels/windowRain.gdshader" id="4_senj2"]
+[ext_resource type="Script" uid="uid://dpsx0yfrpe1js" path="res://Unlockable.gd" id="5_1s8hg"]
+[ext_resource type="Script" uid="uid://cph251i7ro8gt" path="res://UnlockUI.gd" id="6_0eda1"]
+[ext_resource type="Texture2D" uid="uid://pmfkd3tdgwux" path="res://assets/Mona_Lisa.jpg" id="7_14t7h"]
+[ext_resource type="PackedScene" uid="uid://5x7sodyd2cpj" path="res://Player/player.tscn" id="7_t4kv4"]
+[ext_resource type="PackedScene" uid="uid://cjn3tu0mw2ia5" path="res://flow-game/main-game.tscn" id="8_senj2"]
+[ext_resource type="Texture2D" uid="uid://b36u7nders6ej" path="res://assets/The_Anguished_Man_painting.jpg" id="8_suu7y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_0l2xm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r10vh"]
+albedo_texture = ExtResource("3_xokmy")
+uv1_scale = Vector3(-7.095, -7.095, -7.095)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_14t7h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_suu7y"]
+render_priority = 0
+shader = ExtResource("4_senj2")
+shader_parameter/dripping_speed = 1.0
+shader_parameter/dripping_wave_size = Vector2(20, 4)
+shader_parameter/dripping_wave_freq = Vector2(47, 15)
+shader_parameter/dripping_wave_power = Vector2(0.045, 1)
+shader_parameter/static_interval = 10.0
+shader_parameter/static_shift = Vector2(4.8, 0.8)
+shader_parameter/static_wave_size = Vector2(81.432144, 85.45453)
+shader_parameter/static_wave_freq = Vector2(38, 92)
+shader_parameter/static_wave_power = Vector2(1.8, 2.8)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_senj2"]
+sky_horizon_color = Color(0.21306637, 0.21799478, 0.22786233, 1)
+ground_bottom_color = Color(0.13403323, 0.110636376, 0.084307976, 1)
+ground_horizon_color = Color(0.22370672, 0.22881538, 0.23904386, 1)
+
+[sub_resource type="Sky" id="Sky_ksxe6"]
+sky_material = SubResource("ProceduralSkyMaterial_senj2")
+
+[sub_resource type="Environment" id="Environment_3dcgm"]
+background_mode = 2
+sky = SubResource("Sky_ksxe6")
+adjustment_saturation = 0.01
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kek77"]
+size = Vector3(8.982971, 1, 18.67694)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Player" parent="." instance=ExtResource("7_t4kv4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18786442, -1.3750435)
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Doorway" type="Node3D" parent="Environment"]
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Environment/Doorway"]
+transform = Transform3D(-5.4767537e-07, -0.4296626, 0, 12.52935, -1.8781147e-08, 0, 0, 0, 8.777189, 2.630663, 10.045976, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Environment/Doorway"]
+transform = Transform3D(-2.8855112e-07, -0.4296626, 0, 6.6012793, -1.8781147e-08, 0, 0, 0, 0.8689654, 2.630663, 2.2332106, -0.5910971)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="Doorway2" type="Node3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.427673, 0, 0)
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Environment/Doorway2"]
+transform = Transform3D(-5.4767537e-07, -0.4296626, 0, 12.52935, -1.8781147e-08, 0, 0, 0, 8.777189, -14.919041, 10.045976, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Environment/Doorway2"]
+transform = Transform3D(-2.8855112e-07, -0.4296626, 0, 6.6012793, -1.8781147e-08, 0, 0, 0, 0.8689654, -14.919041, 2.2332106, -0.5910971)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 0, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 5.14209, -0.71825933)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 24.848131, 0, 0)
+layers = 3
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 24.848131, 5.14209, -0.71825933)
+layers = 3
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 49.40213, 0, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 49.40213, 5.14209, -0.71825933)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="Wall" type="Node3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3178887)
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 12.277626, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D11" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 5.011072, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D12" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -2.447689, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D13" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(6.1355352, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -9.442076, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 20.2607, 2.3564358, -0.5370743)
+layers = 3
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D8" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 28.19708, 2.355722, -0.5360055)
+layers = 3
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 35.88979, 2.3564358, -0.5370743)
+layers = 3
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Environment/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 40.402023, 2.3564358, -0.5370743)
+layers = 3
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="Window" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(-1.7550121e-07, 4.015, -1.7550121e-07, 0, -1.7550121e-07, -4.015, -4.015, -1.7550121e-07, 7.671402e-15, -12.680469, 3.1011057, 0)
+mesh = SubResource("PlaneMesh_14t7h")
+surface_material_override/0 = SubResource("ShaderMaterial_suu7y")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_3dcgm")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, 10.114066, 3.044477, 1.4162049)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -9.9720955, 3.7547207, 0.60771656)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 1.505
+light_indirect_energy = 4.0
+omni_range = 5.686
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -0.9693718, 3.7547207, -0.9215976)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 1.505
+light_indirect_energy = 4.0
+omni_range = 5.686
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, 17.33736, 3.7547207, -0.9215976)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 1.505
+light_indirect_energy = 4.0
+omni_range = 5.686
+
+[node name="Shelf" type="Sprite3D" parent="."]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -6.3903484, 1.2589021, -2.6673539)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
+
+[node name="Unlockable" type="Area3D" parent="Shelf" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+script = ExtResource("5_1s8hg")
+puzzleUnlockLevel = 1
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+visible = false
+text = "Press E to Unlock"
+font_size = 147
+
+[node name="Shelf2" type="Sprite3D" parent="."]
+transform = Transform3D(0.3442053, 0, 0, 0, 0.29945374, 0, 0, 0, 0.275, -9.138973, 0.8002417, -0.93361616)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(1537.9937, 1681.2976, 648.3191, 439.06763)
+
+[node name="Shelf3" type="Sprite3D" parent="."]
+transform = Transform3D(0.3442053, 0, 0, 0, 0.29945374, 0, 0, 0, 0.275, -1.0499852, 0.69703674, -2.2575705)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(15.8289795, 1290.3323, 554.44727, 366.31274)
+
+[node name="Chair" type="Sprite3D" parent="."]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 10.041243, 0.80964446, -0.83429456)
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="Unlockable" type="Area3D" parent="Chair" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -7.124317)
+script = ExtResource("5_1s8hg")
+puzzleUnlockLevel = 4
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chair/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Chair/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+visible = false
+text = "Press E to Unlock"
+font_size = 147
+
+[node name="Chair2" type="Sprite3D" parent="."]
+transform = Transform3D(0.3960553, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 5.3742266, 0.80964446, -0.83429456)
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="Bookshelf" type="Sprite3D" parent="."]
+transform = Transform3D(0.35960317, 0, 0, 0, 0.35960317, 0, 0, 0, 1.1228482, 12.576487, 1.567066, -2.5796182)
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(1718.5967, 7.9723816, 533.01733, 856.92773)
+
+[node name="Unlockable" type="Area3D" parent="Bookshelf" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0.31890285)
+script = ExtResource("5_1s8hg")
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Bookshelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Bookshelf/Unlockable"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.035762787, 5.109101, -0.41817296)
+visible = false
+text = "Press E to Search"
+font_size = 147
+
+[node name="Desk" type="Sprite3D" parent="."]
+transform = Transform3D(0.35960317, 0, 0, 0, 0.35960317, 0, 0, 0, 1.1228482, 20.879824, 0.9611325, -2.2887487)
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(587.60583, 1190.2223, 1025.945, 467.56177)
+
+[node name="Unlockable" type="Area3D" parent="Desk" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0.31890285)
+script = ExtResource("5_1s8hg")
+puzzleUnlockLevel = 2
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Desk/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Desk/Unlockable"]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 0, 0, 1, 0.035762787, 5.109101, -0.41817296)
+visible = false
+text = "Press E to Search"
+font_size = 147
+
+[node name="Desk2" type="Sprite3D" parent="."]
+transform = Transform3D(0.35960317, 0, 0, 0, 0.35960317, 0, 0, 0, 1.1228482, 27.689877, 0.9611325, -2.2887487)
+layers = 3
+shaded = true
+texture = ExtResource("4_atdb8")
+region_enabled = true
+region_rect = Rect2(933.0967, 2254.451, 292.64673, 481.0171)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Desk2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6570816, 0.42649066)
+light_color = Color(0.91764706, 0.78431374, 0.12156863, 1)
+light_energy = 1.495
+light_indirect_energy = 6.443
+light_cull_mask = 4294967290
+omni_range = 13.404
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Desk2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6570816, 3.6516032)
+layers = 8
+light_color = Color(0.91764706, 0.78431374, 0.12156863, 1)
+light_energy = 1.495
+light_indirect_energy = 6.443
+light_cull_mask = 4294967294
+omni_range = 13.404
+
+[node name="Unlockable" type="Area3D" parent="Desk2" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+script = ExtResource("5_1s8hg")
+puzzleUnlockLevel = 3
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Desk2/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Desk2/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+visible = false
+text = "Press E to Unlock"
+font_size = 147
+
+[node name="Painting" type="Sprite3D" parent="."]
+transform = Transform3D(0.08004078, 0, 0, 0, 0.050523743, 0, 0, 0, 0.25, 8.237208, 2.4940567, -2.6911476)
+shaded = true
+texture = ExtResource("7_14t7h")
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="ScreamingPainting" type="Sprite3D" parent="."]
+transform = Transform3D(1.1305413, 0, 0, 0, 1.0515661, 0, 0, 0, 0.25, 8.237208, 2.4940567, -2.6911476)
+visible = false
+shaded = true
+texture = ExtResource("8_suu7y")
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TopBar" type="Control" parent="UI"]
+layout_mode = 3
+anchor_top = 0.045
+anchor_right = 1.0020001
+anchor_bottom = 0.045
+offset_left = 2.0
+offset_top = -0.16000175
+offset_right = -0.30407715
+offset_bottom = -0.16000175
+grow_horizontal = 2
+
+[node name="UnlockLabel" type="Label" parent="UI" groups=["unlock_ui"]]
+modulate = Color(1, 1, 1, 0)
+offset_right = 40.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+script = ExtResource("6_0eda1")
+
+[node name="MainGame" parent="." instance=ExtResource("8_senj2")]
+visible = false

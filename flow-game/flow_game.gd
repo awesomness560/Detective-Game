@@ -17,3 +17,7 @@ func _ready() -> void:
 		if col >= gridContainer.columns:
 			col = 0
 			row += 1
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("open_flow_menu"):
+		visible = !visible

@@ -2,6 +2,7 @@ extends Area3D
 
 
 @export var unlock_message := "Shelf unlocked!"
+@export var puzzleUnlockLevel : int = 0
 @export var hintEnabled : bool = true
 @export var hintColor : Color
 @export var hintPulsingDuration : float = 1
@@ -17,18 +18,25 @@ var canBeFound = true : set = setCanBeFound
 
 func _ready() -> void:
 	originalColor = sprite3D.modulate
-	canBeFound = true
+	canBeFound = false
 	if hintEnabled == false:
 		hintColor = originalColor
 	#canBeFound = true
 	area_entered.connect(onAreaEntered)
 	area_exited.connect(onAreaExitied)
+	FlowManager.puzzle_completed.connect(onPuzzleCompleted)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and _player_in:
 		_player_in = false
 		canBeFound = false
+		_unlocked = true
 		Globals.unlocked.emit(unlock_message)
+		FlowManager.unlock_next_color()
+
+func onPuzzleCompleted(puzzleLevel : int):
+	if puzzleLevel == puzzleUnlockLevel:
+		canBeFound = true
 
 func setCanBeFound(state : bool):
 	if tween:
