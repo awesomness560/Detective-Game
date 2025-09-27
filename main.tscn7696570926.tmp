@@ -109,9 +109,8 @@ color = Color(0, 0, 0, 0)
 [node name="NPC" type="Node3D" parent="." groups=["npc"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.002253294, 0)
 script = ExtResource("2_4c57u")
-follow_distance = 1.5
-base_speed = 2.0
-max_speed = 3.0
+follow_distance = 1.0
+move_speed = 30.0
 
 [node name="Sprite3D" type="Sprite3D" parent="NPC"]
 transform = Transform3D(0.4901476, 0, 0, 0, 0.62404245, 0, 0, 0, 1, -1.2257456, 1.231364, -1.0443146)
