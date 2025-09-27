@@ -1,5 +1,5 @@
 extends Area3D
-# Godot 4.5 - Door with teleport, fade, sounds, and NPC support
+# Godot 4.5 - Door with teleport, fade, sounds, NPC support, and music switch
 
 @export var target_location: NodePath      # Drag a RoomXSpot (where player spawns)
 @export var fade_rect: NodePath            # Drag UI/ScreenFade (ColorRect)
@@ -71,7 +71,7 @@ func _start_transition() -> void:
 		wait_time = _stairs_sfx.stream.get_length()
 	await get_tree().create_timer(wait_time).timeout
 
-	# 5. Teleport
+	# 5. Teleport + music change
 	_teleport_entities()
 
 	# 6. Fade back in
@@ -101,11 +101,15 @@ func _teleport_entities() -> void:
 
 	# Move NPC behind player
 	if npc:
-		var offset_dir := Vector3.BACK  # relative "behind" direction
-		# safer: place NPC opposite of player's facing direction if you add rotation later
 		var npc_pos = player.global_position + Vector3(0, 0, npc_follow_distance)
 		npc.global_position = npc_pos
 
 		var npc_sprite := npc.get_node_or_null("Sprite3D")
 		if npc_sprite and npc_sprite is Sprite3D:
 			npc_sprite.visible = true
+
+	# 🎵 NEW FEATURE: change room music
+	var music_manager := get_tree().get_first_node_in_group("music_manager")
+	if music_manager and marker.has_meta("room_id"):
+		var room_id: int = marker.get_meta("room_id")
+		music_manager.play_room_music(room_id)
