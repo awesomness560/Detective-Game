@@ -21,7 +21,7 @@ transform = Transform3D(0.55944264, 0, 0, 0, 2.0214114, 0, 0, 0, 1, 0, 1.0293868
 mesh = SubResource("QuadMesh_2slf2")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.044168353, 1.0919124, 1.9517847)
+transform = Transform3D(1, 0, 0, 0, 0.9647873, 0.2630312, 0, -0.2630312, 0.9647873, -0.044168353, 1.8217231, 2.1022248)
 cull_mask = 1048573
 
 [node name="Hitbox" type="Area3D" parent="." groups=["player"]]

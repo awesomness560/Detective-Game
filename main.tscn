@@ -1,24 +1,26 @@
-[gd_scene load_steps=16 format=3 uid="uid://bxq6lb6nu53ob"]
+[gd_scene load_steps=31 format=3 uid="uid://bxq6lb6nu53ob"]
 
+[ext_resource type="Texture2D" uid="uid://cor8u8vauics" path="res://stair-clipart-1.png" id="1_dg77c"]
 [ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_iwyjt"]
+[ext_resource type="Script" uid="uid://egitgykoyeng" path="res://Stairs.gd" id="1_ycdy4"]
+[ext_resource type="Script" uid="uid://bxvmqbkwkpce7" path="res://NPC.gd" id="2_4c57u"]
+[ext_resource type="NavigationMesh" uid="uid://dbj0jyavf1no0" path="res://navmesh.tres" id="2_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bua23usu60e1i" path="res://Window 02 GLB.glb" id="3_3dcgm"]
+[ext_resource type="Texture2D" uid="uid://c4wv60rekdxlm" path="res://32.png" id="3_efxa6"]
 [ext_resource type="Texture2D" uid="uid://dbdss0cywefdm" path="res://wallpaper.png" id="4_1vwtb"]
 [ext_resource type="Texture2D" uid="uid://c0mb2grv1vm5k" path="res://CatumetGamesFurniture.png" id="5_ksxe6"]
 [ext_resource type="Script" uid="uid://cph251i7ro8gt" path="res://UnlockUI.gd" id="7_5vw27"]
 [ext_resource type="Script" uid="uid://dpsx0yfrpe1js" path="res://Unlockable.gd" id="7_kek77"]
 [ext_resource type="PackedScene" uid="uid://5x7sodyd2cpj" path="res://Player/player.tscn" id="8_5vw27"]
+[ext_resource type="PackedScene" uid="uid://cqvacnauwhwro" path="res://door.tscn" id="8_kek77"]
+[ext_resource type="Script" uid="uid://dfv2u6skh4qed" path="res://MusicManager.gd" id="14_w48qg"]
+[ext_resource type="AudioStream" uid="uid://ccpnj7tspn0k4" path="res://music/scary1.mp3" id="15_074og"]
+[ext_resource type="AudioStream" uid="uid://cfe458cmrmqcj" path="res://music/scary2.mp3" id="16_cegan"]
+[ext_resource type="AudioStream" uid="uid://dxhk6ifpk64mb" path="res://music/scary3.mp3" id="17_82xsv"]
+[ext_resource type="AudioStream" uid="uid://bv36krfw4hory" path="res://music/scary4.mp3" id="18_getpj"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_0l2xm"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r10vh"]
-albedo_texture = ExtResource("4_1vwtb")
-uv1_scale = Vector3(-7.095, -7.095, -7.095)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xjn8"]
-albedo_texture = ExtResource("4_1vwtb")
-uv1_scale = Vector3(-0.985, -0.985, -0.985)
+[sub_resource type="BoxShape3D" id="BoxShape3D_w48qg"]
+size = Vector3(3.393036, 3.5233154, 2.0858154)
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iwyjt"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -32,98 +34,49 @@ background_mode = 2
 sky = SubResource("Sky_ksxe6")
 adjustment_saturation = 0.01
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_dg77c"]
+size = Vector3(0.8772583, 1.9694519, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vw27"]
+size = Vector3(1, 2.079834, 1.9737549)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_kek77"]
 size = Vector3(8.982971, 1, 18.67694)
 
+[sub_resource type="BoxMesh" id="BoxMesh_0l2xm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r10vh"]
+albedo_texture = ExtResource("4_1vwtb")
+uv1_scale = Vector3(-7.095, -7.095, -7.095)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2xjn8"]
+albedo_texture = ExtResource("4_1vwtb")
+uv1_scale = Vector3(-0.985, -0.985, -0.985)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
+
+[sub_resource type="AudioStream" id="AudioStream_074og"]
+
 [node name="Node3D" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 0, 0)
-mesh = SubResource("BoxMesh_1exhc")
-surface_material_override/0 = ExtResource("1_iwyjt")
+[node name="stairs" type="Area3D" parent="."]
+script = ExtResource("1_ycdy4")
+target_location = NodePath("../Room2Spot")
+fade_rect = NodePath("../UI/ScreenFade")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 5.14209, 0)
-mesh = SubResource("BoxMesh_1exhc")
-surface_material_override/0 = ExtResource("1_iwyjt")
+[node name="target_position" type="Node3D" parent="stairs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0628014, 5.5448437, -1.3541117)
 
-[node name="Wall" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3178887)
+[node name="Sprite3D" type="Sprite3D" parent="stairs"]
+transform = Transform3D(0.39999998, 0, 0, 0, 0.6123677, 0, 0, 0, 1, -6.433134, 2.8739915, -1.366298)
+texture = ExtResource("1_dg77c")
 
-[node name="Window 02 GLB" parent="Wall" instance=ExtResource("3_3dcgm")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20427513, 2.4257517, -0.31829453)
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Wall"]
-transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -4.982465, 2.3564358, -0.5370743)
-mesh = SubResource("BoxMesh_0l2xm")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="Wall"]
-transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 4.48268, 2.3564358, -0.5370743)
-mesh = SubResource("BoxMesh_0l2xm")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="Wall"]
-transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 0.47155, -0.5370743)
-mesh = SubResource("BoxMesh_0l2xm")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
-
-[node name="MeshInstance3D5" type="MeshInstance3D" parent="Wall"]
-transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 4.4557676, -0.5370743)
-mesh = SubResource("BoxMesh_0l2xm")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="stairs"]
+transform = Transform3D(1, 0, 0, 0, 1.6447836, 0, 0, 0, 1, -6.7273116, 2.0751538, -1.3549783)
+shape = SubResource("BoxShape3D_w48qg")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3dcgm")
-
-[node name="Lights" type="Node" parent="."]
-
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -0.05298543, 4.0660324, 1.4162049)
-light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
-light_energy = 2.0
-light_indirect_energy = 4.0
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -6.8782625, 4.4722147, -1.0455341)
-light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
-light_energy = 2.0
-light_indirect_energy = 4.0
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -6.3903484, 1.2589021, -2.6673539)
-modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
-shaded = true
-texture = ExtResource("5_ksxe6")
-region_enabled = true
-region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
-
-[node name="Unlockable" type="Area3D" parent="Sprite3D" node_paths=PackedStringArray("sprite3D", "promptLabel")]
-script = ExtResource("7_kek77")
-hintColor = Color(0.84717536, 0, 0.32440192, 1)
-sprite3D = NodePath("..")
-promptLabel = NodePath("PromptLabel")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/Unlockable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
-shape = SubResource("BoxShape3D_kek77")
-
-[node name="PromptLabel" type="Label3D" parent="Sprite3D/Unlockable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
-visible = false
-text = "Press E to Unlock"
-font_size = 147
-
-[node name="Sprite3D2" type="Sprite3D" parent="."]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.335869, 0.80964446, -0.83429456)
-shaded = true
-texture = ExtResource("5_ksxe6")
-region_enabled = true
-region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -145,5 +98,454 @@ offset_bottom = 23.0
 horizontal_alignment = 1
 script = ExtResource("7_5vw27")
 
+[node name="ScreenFade" type="ColorRect" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="NPC" type="Node3D" parent="." groups=["npc"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.002253294, 0)
+script = ExtResource("2_4c57u")
+follow_distance = 1.5
+base_speed = 2.0
+max_speed = 3.0
+
+[node name="Sprite3D" type="Sprite3D" parent="NPC"]
+transform = Transform3D(0.4901476, 0, 0, 0, 0.62404245, 0, 0, 0, 1, -1.2257456, 1.231364, -1.0443146)
+texture = ExtResource("3_efxa6")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="NPC"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NPC"]
+transform = Transform3D(1, 0, 0, 0, 1.2294054, 0, 0, 0, 1, -1.2641056, 1.1034014, -1.0870403)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NPC/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0005187988, -0.10102868, 0)
+shape = SubResource("BoxShape3D_dg77c")
+
 [node name="Player" parent="." instance=ExtResource("8_5vw27")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.3750435)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20265174, -1.3750435)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Player"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player/StaticBody3D" groups=["player"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009665251, 1.0819834, 0.5313529)
+shape = SubResource("BoxShape3D_5vw27")
+
+[node name="Room1Spot" type="Node3D" parent="."]
+
+[node name="Shelf" type="Sprite3D" parent="Room1Spot"]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -3.2948875, 1.2589021, -2.6673539)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
+
+[node name="Unlockable" type="Area3D" parent="Room1Spot/Shelf" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+script = ExtResource("7_kek77")
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room1Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Room1Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+visible = false
+text = "Press E to Unlock"
+font_size = 147
+
+[node name="Lights" type="Node" parent="Room1Spot"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room1Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -0.05298543, 4.0660324, 1.4162049)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Room1Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -6.8782625, 4.4722147, -1.0455341)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="sofa" type="Sprite3D" parent="Room1Spot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.335869, 0.80964446, 1.0542316)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="Wall" type="Node3D" parent="Room1Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3178887)
+
+[node name="Window 02 GLB" parent="Room1Spot/Wall" instance=ExtResource("3_3dcgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20427513, 2.4257517, -0.31829453)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room1Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -4.982465, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Room1Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 4.48268, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Room1Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 0.47155, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Room1Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 4.4557676, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room1Spot"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 5.14209, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="Label3D" type="Label3D" parent="Room1Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4096045, 3.245747, -2.3691823)
+text = "This is ROOM 1"
+
+[node name="Area3D" parent="Room1Spot" instance=ExtResource("8_kek77")]
+transform = Transform3D(0.022999613, 0, 0, 0, 0.026190395, 0, 0, 0, 0.05614152, 6.2823143, 1.1398821, -2.644915)
+target_location = NodePath("../../Room2Spot")
+fade_rect = NodePath("../../UI/ScreenFade")
+stairs_duration = 1.0
+
+[node name="Room2Spot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -13.009721)
+
+[node name="Shelf" type="Sprite3D" parent="Room2Spot"]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -6.3903484, 1.2589021, -2.6673539)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
+
+[node name="Unlockable" type="Area3D" parent="Room2Spot/Shelf" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+script = ExtResource("7_kek77")
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room2Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Room2Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+visible = false
+text = "Press E to Unlock"
+font_size = 147
+
+[node name="Lights" type="Node" parent="Room2Spot"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room2Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -0.05298543, 4.0660324, -13.299288)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Room2Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -6.8782625, 4.4722147, -13.423952)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="sofa" type="Sprite3D" parent="Room2Spot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.335869, 0.80964446, -0.83429456)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="Wall" type="Node3D" parent="Room2Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3178887)
+
+[node name="Window 02 GLB" parent="Room2Spot/Wall" instance=ExtResource("3_3dcgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20427513, 2.4257517, -0.31829453)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room2Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -4.982465, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Room2Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 4.48268, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Room2Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 0.47155, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Room2Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 4.4557676, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="floor2" type="MeshInstance3D" parent="Room2Spot"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 5.14209, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="Label3D2" type="Label3D" parent="Room2Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4096045, 3.245747, -2.4486494)
+text = "This is ROOM 2"
+
+[node name="Area3D2" parent="Room2Spot" instance=ExtResource("8_kek77")]
+transform = Transform3D(0.022999613, 0, 0, 0, 0.026190395, 0, 0, 0, 0.05614152, 6.2823143, 1.1398821, -2.692565)
+target_location = NodePath("../../Room3Spot")
+fade_rect = NodePath("../../UI/ScreenFade")
+stairs_duration = 1.0
+
+[node name="Room3Spot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -28.06992)
+
+[node name="Shelf" type="Sprite3D" parent="Room3Spot"]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -6.3903484, 1.2589021, -2.6673539)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
+
+[node name="Unlockable" type="Area3D" parent="Room3Spot/Shelf" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+script = ExtResource("7_kek77")
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room3Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Room3Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+visible = false
+text = "Press E to Unlock"
+font_size = 147
+
+[node name="Lights" type="Node" parent="Room3Spot"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room3Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -0.05298543, 4.0660324, -29.575983)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Room3Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -6.8782625, 4.4722147, -29.829443)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="sofa" type="Sprite3D" parent="Room3Spot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.335869, 0.80964446, -0.83429456)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="Wall" type="Node3D" parent="Room3Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3178887)
+
+[node name="Window 02 GLB" parent="Room3Spot/Wall" instance=ExtResource("3_3dcgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20427513, 2.4257517, -0.31829453)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room3Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -4.982465, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Room3Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 4.48268, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Room3Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 0.47155, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Room3Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 4.4557676, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room3Spot"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 5.14209, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="Label3D3" type="Label3D" parent="Room3Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4096045, 3.245747, -2.429081)
+text = "This is ROOM 3"
+
+[node name="Area3D3" parent="Room3Spot" instance=ExtResource("8_kek77")]
+transform = Transform3D(0.022999613, 0, 0, 0, 0.026190395, 0, 0, 0, 0.05614152, 6.2823143, 1.1398821, -2.576374)
+target_location = NodePath("../../Room4Spot")
+fade_rect = NodePath("../../UI/ScreenFade")
+stairs_duration = 1.0
+
+[node name="Room4Spot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -45.255074)
+
+[node name="Shelf" type="Sprite3D" parent="Room4Spot"]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, -6.3903484, 1.2589021, -2.6673539)
+modulate = Color(0.4955091, 0.4955091, 0.4955091, 1)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1081.9337, 0, 624.71655, 932.49426)
+
+[node name="Unlockable" type="Area3D" parent="Room4Spot/Shelf" node_paths=PackedStringArray("sprite3D", "promptLabel")]
+script = ExtResource("7_kek77")
+hintColor = Color(0.84717536, 0, 0.32440192, 1)
+sprite3D = NodePath("..")
+promptLabel = NodePath("PromptLabel")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Room4Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
+shape = SubResource("BoxShape3D_kek77")
+
+[node name="PromptLabel" type="Label3D" parent="Room4Spot/Shelf/Unlockable"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+visible = false
+text = "Press E to Unlock"
+font_size = 147
+
+[node name="Lights" type="Node" parent="Room4Spot"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Room4Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -0.05298543, 4.0660324, -45.98022)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Room4Spot/Lights"]
+transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, -6.8782625, 4.4722147, -46.519386)
+light_color = Color(0.9372549, 0.7529412, 0.4392157, 1)
+light_energy = 2.0
+light_indirect_energy = 4.0
+
+[node name="sofa" type="Sprite3D" parent="Room4Spot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -2.335869, 0.80964446, -0.83429456)
+shaded = true
+texture = ExtResource("5_ksxe6")
+region_enabled = true
+region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
+
+[node name="Wall" type="Node3D" parent="Room4Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2.3178887)
+
+[node name="Window 02 GLB" parent="Room4Spot/Wall" instance=ExtResource("3_3dcgm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20427513, 2.4257517, -0.31829453)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room4Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, -4.982465, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Room4Spot/Wall"]
+transform = Transform3D(8.173882, 0, 0, 0, 6.9058537, 0, 0, 0, 0.32348025, 4.48268, 2.3564358, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_r10vh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Room4Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 0.47155, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Room4Spot/Wall"]
+transform = Transform3D(1.3644239, 0, 0, 0, 2.499388, 0, 0, 0, 0.32348025, -0.29798174, 4.4557676, -0.5370743)
+mesh = SubResource("BoxMesh_0l2xm")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2xjn8")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Room4Spot"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 5.14209, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="Label3D4" type="Label3D" parent="Room4Spot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.4096045, 3.245747, -2.2371635)
+text = "This is ROOM 4
+"
+
+[node name="Area3D4" parent="Room4Spot" instance=ExtResource("8_kek77")]
+transform = Transform3D(0.022999613, 0, 0, 0, 0.026190395, 0, 0, 0, 0.05614152, 6.2823143, 1.1398821, -2.5596085)
+target_location = NodePath("../../Room1Spot")
+fade_rect = NodePath("../../UI/ScreenFade")
+stairs_duration = 1.0
+
+[node name="NavRegion" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.41931403, 0)
+navigation_mesh = ExtResource("2_efxa6")
+
+[node name="floor1" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="floor2" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, -13.009721)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="floor3" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.42966256, 0, 0, 0, 4.8278317, 0, -0.41931403, -28.069923)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="floor4" type="MeshInstance3D" parent="NavRegion"]
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, -0.41931403, -45.255074)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("1_iwyjt")
+
+[node name="MusicManager" type="Node" parent="." groups=["music_manager"]]
+script = ExtResource("14_w48qg")
+room1_music = ExtResource("15_074og")
+room2_music = ExtResource("16_cegan")
+room3_music = ExtResource("17_82xsv")
+room4_music = ExtResource("18_getpj")
+
+[node name="music_player" type="AudioStreamPlayer3D" parent="MusicManager"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.3649735, -2.0717697)
+stream = SubResource("AudioStream_074og")
