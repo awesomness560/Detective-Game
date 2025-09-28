@@ -1,0 +1,52 @@
+joshua_russo: Hey. [pause=0.5] [b]Hey.[/b] [pause=0.4] What the hell are you doing here?
+[wait time="1.0" hide_text="false" skippable="true"]
+joshua_russo: You’re not supposed to be here.
+# Wheezing Audio
+joshua_russo: Did you think this was funny? You getting a good laugh out of this?
+joshua_russo: Talk. [pause=0.3] To. [pause=0.3] Me.
+player: [speed=0.5]I can't.[pause=0.2].[pause=0.2].[pause=0.6] think.
+joshua_russo: Can’t think?
+joshua_russo: Who.[pause=0.8].[pause=0.8].[pause=0.8]
+[wait time="1.0" hide_text="false"]
+joshua_russo: Let it all come back to you. Think.
+[wait time="1.5" skippable="true"]
+player: What’s going on? [pause=1] Who are you?
+[wait time="1.0"]
+# As is custom by now, he stares, this time taking a big, deep breath of air.
+joshua_russo: Russo. [pause=1] My name is Joshua Russo. [pause=0.8] I’m your friend.
+# You shut your eyes and think to yourself. 
+player: [i]Russo.[pause=0.3].[pause=0.3].[pause=0.3] Russo.[pause=0.3].[pause=0.3].[pause=0.3] [/i]
+# All that comes, however, is the darkness of your eyelids.
+player: I don’t know anyone named Russo.
+joshua_russo: [speed=3].[pause=0.2].[pause=0.2].[pause=0.2]Really now?
+player: I.[pause=0.3].[pause=0.3].[pause=0.3]
+joshua_russo: Fine.[pause=0.5] It is what it is.[pause=0.5] Let me have a look at you.
+# He gets up, walking around the chair, looking at you from different angles. At one point he commands you to stand up, which you are rather quick to do. He tells you to sit down, and then thinks to himself. He continues.
+joshua_russo: If you don’t remember me, what [pause=0.4]D[pause=0.3]O[pause=0.3] you remember?
+player: ...
+joshua_russo: Well?
+player: [speed=3].[pause=0.1].[pause=0.1].[pause=0.1]Just a name.[pause=0.2] It’s-
+[text_input text="" var="playerName"]
+[wait time="1.0"]
+joshua_russo: Do you know whose name that is?
+[wait time="0.5"]
+set {russoName} = "Russo"
+joshua_russo: It’s YOUR name![pause=0.4] I’m Russo, and you’re {playerName}!
+[wait time="1.0"]
+player: It…[pause=0.5]it…[pause=0.5]yeah. It does sound… I think you’re right.
+joshua_russo: I’m not sure what’s going on here, but it seems like your memory is fried right now. [pause=1]That’s alright. [pause=1]Maybe you can’t remember anything, but your brain’s surely still just as powerful as ever, Boss.
+player: ...[pause=0.5]Boss?
+joshua_russo: Not ringing any bells? You’re my boss. [pause=1]We’re back at the scene of a homicide we were investigating a week ago. [pause=0.5]You and I, we’re partners on the force. [pause=0.5]No case out there we can’t crack with a little effort.
+player: A homicide!?
+joshua_russo: Yeah. [pause=0.5]Come on, I’ll show you.
+player: I’m not ready to see a dead body in this state…[pause=0.5]hrrk…
+joshua_russo: No worries, Boss. [pause=0.5]They already cleaned all that mess up and took all the pictures they needed. [pause=0.5]Our job isn’t to stare at a dead man, but to go through his belongings. [pause=0.5]There’s something here we need to find.
+player: And what is that?
+joshua_russo: The victim was something of a kleptomaniac. [pause=0.5]Lots of stolen goods tucked away all throughout this place.
+Reaching into his pocket, Russo pulls out a bulky silver watch.
+joshua_russo: We found this engraved watch in a coat he had hanging up. [pause=0.5]Belonged to a businessman on vacation who reported it stolen, we’ll tell him and mail it back to him when we can, but no harm in using it as evidence for the time being, yeah?
+player: But what specifically are we looking for?
+joshua_russo: You didn’t tell me, unfortunately.
+player: I didn’t?
+joshua_russo: Not unusual for you. [pause=0.5]You like to try and get me to figure this sort of stuff out for myself, but sometimes you can be a real son of a–[pause=3]....anyways. [pause=1]If your memory’s shot right now, best we can do is just get searching, and see what we find. [pause=0.5]Maybe if we find whatever it is you were looking for, everything will come back to you.
+player: .....Alright then. [pause=0.5]Where should we get started?

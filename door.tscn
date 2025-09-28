@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqvacnauwhwro"]
+
+[ext_resource type="Script" uid="uid://ttlr82wkjomo" path="res://door.gd" id="1_ba8gm"]
+[ext_resource type="Texture2D" uid="uid://bqsd34o5g4rm4" path="res://door.png" id="2_50cdl"]
+[ext_resource type="AudioStream" uid="uid://du4eqlu7g2fdu" path="res://sounds/steps2.mp3" id="3_50cdl"]
+[ext_resource type="AudioStream" uid="uid://ssnybf381p18" path="res://sounds/footsteps-on-wood-397989.mp3" id="4_4xadh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_50cdl"]
+size = Vector3(41.136215, 85.60036, 158.4592)
+
+[node name="Area3D" type="Area3D"]
+transform = Transform3D(0.04038078, 0, 0, 0, 0.045501884, 0, 0, 0, 0.05614152, 0, 0, 0)
+script = ExtResource("1_ba8gm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.36235905, -1.1391525, 50.117645)
+shape = SubResource("BoxShape3D_50cdl")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+texture = ExtResource("2_50cdl")
+
+[node name="PromptLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.019962, 0)
+visible = false
+text = "Press E to Enter"
+font_size = 1000
+
+[node name="DoorSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_50cdl")
+
+[node name="StairsSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_4xadh")
