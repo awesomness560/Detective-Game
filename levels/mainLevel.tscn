@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://w1iwff1yggpr"]
+[gd_scene load_steps=52 format=3 uid="uid://w1iwff1yggpr"]
 
 [ext_resource type="Script" uid="uid://ck4t1kma0il28" path="res://levels/level_manager.gd" id="1_1e5mj"]
 [ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_yv058"]
@@ -25,6 +25,20 @@
 [ext_resource type="Texture2D" uid="uid://crtkn6mnwqdxt" path="res://assets/clues/locket_2.png" id="14_353yn"]
 [ext_resource type="PackedScene" uid="uid://t6rpp6sdndve" path="res://assets/door-closed/door_closed.glb" id="23_o3iio"]
 [ext_resource type="PackedScene" uid="uid://cgu483ns0dk6j" path="res://assets/door-open/door_open.glb" id="24_xigk4"]
+[ext_resource type="Texture2D" uid="uid://d1oo5na1rf23c" path="res://assets/intro/anim/tv_scene_peeeking.jpg" id="26_5q7x6"]
+[ext_resource type="Texture2D" uid="uid://bn5fju1iqyh2w" path="res://assets/intro/anim/tv_scene_run.jpg" id="27_en6vd"]
+[ext_resource type="Texture2D" uid="uid://ce1048pud44bo" path="res://assets/intro/anim/tv_scene_run2.jpg" id="28_ms0ig"]
+[ext_resource type="Texture2D" uid="uid://d0ix47ref24h4" path="res://assets/intro/anim/tv_scene_stumble.png" id="29_turb2"]
+[ext_resource type="Texture2D" uid="uid://c22k5e75knr6s" path="res://assets/intro/anim/tv_scene_stumble2.png" id="30_uy5nf"]
+[ext_resource type="Texture2D" uid="uid://bfcpm3eejby7e" path="res://assets/intro/anim/tv_scene_getup.png" id="31_dh1ef"]
+[ext_resource type="Texture2D" uid="uid://c0m4vnbwte483" path="res://assets/intro/anim/tv_scene_getup2.png" id="32_dh7nd"]
+[ext_resource type="Texture2D" uid="uid://csg88iob6l5td" path="res://assets/intro/anim/tv_scene_runagain.png" id="33_kfyvs"]
+[ext_resource type="Texture2D" uid="uid://dc3muh8twddw6" path="res://assets/intro/anim/tv_scene_runagain2.png" id="34_11xma"]
+[ext_resource type="Texture2D" uid="uid://dkmdbgosgikb2" path="res://assets/intro/anim/tv_scene_inspect.png" id="35_bft5j"]
+[ext_resource type="Texture2D" uid="uid://liegr63glfgj" path="res://assets/intro/anim/tv_scene_hand1.png" id="36_ciqgi"]
+[ext_resource type="Texture2D" uid="uid://eqtg6lepf4qr" path="res://assets/intro/anim/tv_scene_hand2.png" id="37_m0ofs"]
+[ext_resource type="Texture2D" uid="uid://brfmb4w2mmgq2" path="res://assets/intro/anim/tv_scene_hand3.png" id="38_dc0c4"]
+[ext_resource type="Texture2D" uid="uid://dk84ohfip0vle" path="res://assets/intro/anim/tv_scene_hand4.png" id="39_vmape"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xcwmv"]
 streams_count = 3
@@ -76,7 +90,57 @@ size = Vector3(8.982971, 1, 18.67694)
 [sub_resource type="BoxShape3D" id="BoxShape3D_xigk4"]
 size = Vector3(3.3553467, 4.8935547, 5.531128)
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("textures", "background", "newColorUnlock", "normalPainting", "screamingPainting", "worldEnvironment", "russoFinalLocation", "music")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_lls03"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_5q7x6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_en6vd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_ms0ig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_turb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_uy5nf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_dh1ef")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_dh7nd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_kfyvs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_11xma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_bft5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_ciqgi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_m0ofs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_dc0c4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_vmape")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("textures", "background", "newColorUnlock", "normalPainting", "screamingPainting", "worldEnvironment", "russoFinalLocation", "music", "introCanvas", "cutscene1")]
 script = ExtResource("1_1e5mj")
 textures = [NodePath("UI/Tome"), NodePath("UI/BurntPhoto"), NodePath("UI/Locksmith"), NodePath("UI/GlassShard"), NodePath("UI/Locket")]
 background = NodePath("Background")
@@ -87,6 +151,8 @@ worldEnvironment = NodePath("WorldEnvironment")
 russoFinalLocation = NodePath("RussoTeleportLocation")
 music = NodePath("Audio/Music")
 creditsScene = ExtResource("2_imqdc")
+introCanvas = NodePath("Intro")
+cutscene1 = NodePath("Intro/AnimatedSprite2D")
 
 [node name="Audio" type="Node" parent="."]
 
@@ -599,7 +665,8 @@ vertical_alignment = 1
 [node name="Label" type="Label" parent="UI"]
 offset_right = 40.0
 offset_bottom = 23.0
-text = "Press [Tab] to open FLOW game"
+text = "Press [Tab] to open FLOW game
+[Right Click] to remove FLOW connection"
 
 [node name="MainGame" parent="." instance=ExtResource("8_senj2")]
 visible = false
@@ -622,5 +689,40 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.526625, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FinalCutscene"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1776733, 1.9467773, -1.4629517)
 shape = SubResource("BoxShape3D_xigk4")
+
+[node name="Intro" type="CanvasLayer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Intro"]
+visible = false
+position = Vector2(573.99994, 325)
+scale = Vector2(0.38266665, 0.2682353)
+sprite_frames = SubResource("SpriteFrames_lls03")
+frame = 13
+frame_progress = 1.0
+
+[node name="Label" type="Label" parent="Intro"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 60
+text = "Press [E] to start"
+
+[node name="bg" type="ColorRect" parent="Intro"]
+z_index = -2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="area_entered" from="FinalCutscene" to="." method="_on_final_cutscene_area_entered"]

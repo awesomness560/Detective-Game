@@ -11,18 +11,40 @@ extends Node3D
 @export var russoFinalLocation : Node3D
 @export var music : AudioStreamPlayer
 @export var creditsScene : PackedScene
+@export var introCanvas : CanvasLayer
+@export var cutscene1 : AnimatedSprite2D
+@onready var label: Label = $Intro/Label
+@onready var bg: ColorRect = $Intro/bg
 
 var currentConvo : int = 0
 var isInFinale : bool = false
+var isCutscene : bool = true
 
 func _ready() -> void:
 	Globals.unlocked.connect(foundSomething)
 	Dialogic.timeline_ended.connect(onTimelineEnded)
 	Globals.canMove = false
-	intro()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact") and isCutscene:
+		label.hide()
+		bg.hide()
+		cutscene1.show()
+		cutscene1.play("default")
+		isCutscene = false
+		await cutscene1.animation_finished
+		introCanvas.queue_free()
+		intro()
 
 func intro():
-	pass
+	runDialogue("0intro")
+	await Dialogic.timeline_ended
+	Globals.canMove = true
+	music.play()
+	
+	var name : String = Dialogic.VAR.playerName as String
+	if name.to_lower() == "harper":
+		finalUnlockSequence()
 
 func foundSomething(thing : int):
 	if thing == 4:
@@ -101,8 +123,9 @@ func onTimelineEnded():
 	Globals.clueTime.emit(false)
 	Globals.convoFinished.emit(currentConvo)
 	
-	newColorUnlock.show()
-	newColorUnlock.modulate.a = 1
+	if currentConvo < 2:
+		newColorUnlock.show()
+		newColorUnlock.modulate.a = 1
 	var tween := create_tween()
 	tween.tween_property(newColorUnlock, "modulate:a", 0.0, 4)
 	
