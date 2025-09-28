@@ -10,35 +10,66 @@ extends Node3D
 @export var worldEnvironment : WorldEnvironment
 @export var russoFinalLocation : Node3D
 @export var music : AudioStreamPlayer
+@export var creditsScene : PackedScene
 
 var currentConvo : int = 0
+var isInFinale : bool = false
 
 func _ready() -> void:
 	Globals.unlocked.connect(foundSomething)
 	Dialogic.timeline_ended.connect(onTimelineEnded)
+	Globals.canMove = false
+	intro()
+
+func intro():
+	pass
 
 func foundSomething(thing : int):
 	if thing == 4:
-		finalUnlockSequence()
+		finalFUCKYOU()
 		return
 	Globals.clueTime.emit(true)
-	#var playback = music.get_playback_position()
-	#music.pitch_scale -= 0.1
-	#music.seek(playback)
+	var playback = music.get_playback_position()
+	music.pitch_scale -= 0.1
+	music.seek(playback)
 	textures[thing].visible = true
 	background.show()
 	currentConvo = thing
-	#Globals.canMove = false
+	Globals.canMove = false
+	music.volume_db -= 10
 	match thing:
 		0:
-			#runDialogue("intro")
-			pass
+			runDialogue("1tomescene")
 		1:
+			runDialogue("2photographscene")
 			screamingPainting.show()
 			normalPainting.hide()
-	await get_tree().create_timer(2).timeout
+		2:
+			runDialogue("3receipt")
+		3:
+			runDialogue("4shard")
+	#await get_tree().create_timer(2).timeout
+	#
+	#onTimelineEnded()
+
+func finalFUCKYOU():
+	isInFinale = true
+	textures[4].show()
+	background.show()
+	Globals.canMove = false
 	
-	onTimelineEnded()
+	runDialogue("5finale")
+	await Dialogic.timeline_ended
+	
+	runDialogue("6actualfinaleijustrealizedtheseshouldbeseparatesorrylol")
+	await get_tree().create_timer(0.5).timeout
+	await Dialogic.timeline_ended
+	
+	textures[4].hide()
+	background.hide()
+	Globals.canMove = true
+	finalUnlockSequence()
+	pass
 
 func finalUnlockSequence():
 	#dialogue
@@ -66,6 +97,9 @@ func onTimelineEnded():
 	
 	background.hide()
 	Globals.canMove = true
+	music.volume_db += 10
+	Globals.clueTime.emit(false)
+	Globals.convoFinished.emit(currentConvo)
 	
 	newColorUnlock.show()
 	newColorUnlock.modulate.a = 1
@@ -75,6 +109,16 @@ func onTimelineEnded():
 	await tween.finished
 	
 	newColorUnlock.hide()
-	
-	Globals.clueTime.emit(false)
-	Globals.convoFinished.emit(currentConvo)
+
+
+func _on_final_cutscene_area_entered(area: Area3D) -> void:
+	if area.is_in_group("player") and isInFinale:
+		music.volume_db -= 40
+		runDialogue("7finaleforrealsies")
+		Globals.canMove = false
+		
+		await Dialogic.timeline_ended
+		
+		music.stop()
+		var credits = creditsScene.instantiate()
+		add_child(credits)

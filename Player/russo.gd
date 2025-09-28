@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func final():
 	isFinal = true
+	russoSprite.play("idle_normal")
 
 func _process(delta: float) -> void:
 	if not player or isFinal:

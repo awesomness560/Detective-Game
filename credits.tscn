@@ -1,0 +1,144 @@
+[gd_scene load_steps=4 format=3 uid="uid://k3ctlppjrpyd"]
+
+[ext_resource type="Script" uid="uid://eqtikphcc3v7" path="res://credits.gd" id="1_c1t8d"]
+[ext_resource type="AudioStream" uid="uid://cpj4e25vx4tys" path="res://assets/sounds/beethoven-moonlight-sonata-first-theme-piano-sonata-no-14-401567.mp3" id="2_g4wvt"]
+[ext_resource type="Texture2D" uid="uid://ctxdlv1llyge6" path="res://assets/russo-walk/littleman.png" id="3_g4wvt"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_c1t8d")
+
+[node name="Blackground" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Credits" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -227.0
+offset_top = 386.0
+offset_right = 227.0
+offset_bottom = 871.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 100
+metadata/_edit_use_anchors_ = true
+
+[node name="Credits" type="VBoxContainer" parent="Credits"]
+layout_mode = 2
+
+[node name="Credits" type="Label" parent="Credits/Credits"]
+layout_mode = 2
+text = "Programmer - Sharad"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits5" type="Label" parent="Credits/Credits"]
+layout_mode = 2
+text = "Programmer  - Vlad"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits2" type="Label" parent="Credits/Credits"]
+layout_mode = 2
+text = "Writer - Hunter "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits3" type="Label" parent="Credits/Credits"]
+layout_mode = 2
+text = "Character Artist  - Mando"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits4" type="Label" parent="Credits/Credits"]
+layout_mode = 2
+text = "Background Artist  - Adriana"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits2" type="VBoxContainer" parent="Credits"]
+layout_mode = 2
+
+[node name="Credits" type="Label" parent="Credits/Credits2"]
+layout_mode = 2
+text = "Joshua Russo - As Joshua Russo"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits2" type="Label" parent="Credits/Credits2"]
+layout_mode = 2
+text = "You - As Harper"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits3" type="VBoxContainer" parent="Credits"]
+layout_mode = 2
+
+[node name="Credits" type="Label" parent="Credits/Credits3"]
+layout_mode = 2
+text = "Music by Melody Ayres-Griffiths from Pixabay"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits2" type="Label" parent="Credits/Credits3"]
+layout_mode = 2
+text = "Sound Effect by freesound_community from Pixabay"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits3" type="Label" parent="Credits/Credits3"]
+layout_mode = 2
+text = "Mehdi Shahsavan Asset Door"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits4" type="Label" parent="Credits/Credits3"]
+layout_mode = 2
+text = "Music by Saturn-3-Music from Pixabay"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_g4wvt")
+volume_db = 20.0
+autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -221.0
+offset_top = -250.0
+offset_right = 279.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_g4wvt")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -263.0
+offset_top = 203.0
+offset_right = 263.0
+offset_bottom = 245.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+text = "Thank you from Russo and the team"

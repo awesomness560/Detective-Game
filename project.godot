@@ -28,7 +28,14 @@ directories/dch_directory={
 "player": "res://dialogue/characters/player.dch"
 }
 directories/dtl_directory={
-"intro": "res://dialogue/intro.dtl"
+"0intro": "res://dialogue/0intro.dtl",
+"1tomescene": "res://dialogue/1tomescene.dtl",
+"2photographscene": "res://dialogue/2photographscene.dtl",
+"3receipt": "res://dialogue/3receipt.dtl",
+"4shard": "res://dialogue/4shard.dtl",
+"5finale": "res://dialogue/5finale.dtl",
+"6actualfinaleijustrealizedtheseshouldbeseparatesorrylol": "res://dialogue/6actualfinaleijustrealizedtheseshouldbeseparatesorrylol.dtl",
+"7finaleforrealsies": "res://dialogue/7finaleforrealsies.dtl"
 }
 layout/style_directory={}
 glossary/default_case_sensitive=true

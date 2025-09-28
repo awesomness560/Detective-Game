@@ -1,8 +1,9 @@
-[gd_scene load_steps=35 format=3 uid="uid://w1iwff1yggpr"]
+[gd_scene load_steps=37 format=3 uid="uid://w1iwff1yggpr"]
 
 [ext_resource type="Script" uid="uid://ck4t1kma0il28" path="res://levels/level_manager.gd" id="1_1e5mj"]
 [ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_yv058"]
 [ext_resource type="AudioStream" uid="uid://frm8voemoi4e" path="res://assets/sounds/murder-mystery-spooky-midsomer-orchestral-instrumental-theme-147009(1).mp3" id="2_4sc5s"]
+[ext_resource type="PackedScene" uid="uid://k3ctlppjrpyd" path="res://credits.tscn" id="2_imqdc"]
 [ext_resource type="PackedScene" uid="uid://dylva7hsisile" path="res://Player/russo.tscn" id="2_xt2po"]
 [ext_resource type="Script" uid="uid://c2vxelkswiqbs" path="res://audioScripts/whispers.gd" id="3_353yn"]
 [ext_resource type="AudioStream" uid="uid://isphu1abala4" path="res://assets/sounds/whisper5-94457.mp3" id="3_gfavo"]
@@ -72,9 +73,12 @@ adjustment_saturation = 0.01
 [sub_resource type="BoxShape3D" id="BoxShape3D_kek77"]
 size = Vector3(8.982971, 1, 18.67694)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_xigk4"]
+size = Vector3(3.3553467, 4.8935547, 5.531128)
+
 [node name="Node3D" type="Node3D" node_paths=PackedStringArray("textures", "background", "newColorUnlock", "normalPainting", "screamingPainting", "worldEnvironment", "russoFinalLocation", "music")]
 script = ExtResource("1_1e5mj")
-textures = [NodePath("UI/Tome"), NodePath("UI/BurntPhoto"), NodePath("UI/Locksmith"), NodePath("UI/GlassShard")]
+textures = [NodePath("UI/Tome"), NodePath("UI/BurntPhoto"), NodePath("UI/Locksmith"), NodePath("UI/GlassShard"), NodePath("UI/Locket")]
 background = NodePath("Background")
 newColorUnlock = NodePath("UI/ColorUnlocked")
 normalPainting = NodePath("Painting")
@@ -82,13 +86,13 @@ screamingPainting = NodePath("ScreamingPainting")
 worldEnvironment = NodePath("WorldEnvironment")
 russoFinalLocation = NodePath("RussoTeleportLocation")
 music = NodePath("Audio/Music")
+creditsScene = ExtResource("2_imqdc")
 
 [node name="Audio" type="Node" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("2_4sc5s")
 volume_db = -5.0
-autoplay = true
 bus = &"Music"
 
 [node name="Whispers" type="AudioStreamPlayer" parent="Audio" node_paths=PackedStringArray("timer")]
@@ -611,3 +615,12 @@ transform = Transform3D(-3.934025e-09, 0, -0.09, 0, 0.09, 0, 0.09, 0, -3.934025e
 
 [node name="RussoTeleportLocation" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.626932, 1.2033128, -1.5374006)
+
+[node name="FinalCutscene" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.526625, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FinalCutscene"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1776733, 1.9467773, -1.4629517)
+shape = SubResource("BoxShape3D_xigk4")
+
+[connection signal="area_entered" from="FinalCutscene" to="." method="_on_final_cutscene_area_entered"]
