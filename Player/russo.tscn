@@ -1,0 +1,57 @@
+[gd_scene load_steps=9 format=3 uid="uid://dylva7hsisile"]
+
+[ext_resource type="Script" uid="uid://cr1b6daxkw8i1" path="res://Player/russo.gd" id="1_qqmo8"]
+[ext_resource type="Texture2D" uid="uid://cuvj63jtpgakj" path="res://assets/russo/standing_boy.png" id="2_jdjgh"]
+[ext_resource type="Texture2D" uid="uid://dnt716e5tjvr7" path="res://assets/russo-walk/walking_cycle1.png" id="2_ppg44"]
+[ext_resource type="Texture2D" uid="uid://l7v8sh6t6olq" path="res://assets/russo-walk/walking_cycle2.png" id="3_hlvn7"]
+[ext_resource type="Texture2D" uid="uid://fry056x7bi2e" path="res://assets/russo/standing_boy_nice.png" id="3_vkq1r"]
+[ext_resource type="Texture2D" uid="uid://b0rota8loomxq" path="res://assets/russo-walk/walking_cycle3.png" id="4_jdjgh"]
+[ext_resource type="Texture2D" uid="uid://ba1m6y802lehr" path="res://assets/russo-walk/walking_cycle4.png" id="5_vkq1r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1m7a0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jdjgh")
+}],
+"loop": true,
+"name": &"idle_clue",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_vkq1r")
+}],
+"loop": true,
+"name": &"idle_normal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_ppg44")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hlvn7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_jdjgh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_vkq1r")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 10.0
+}]
+
+[node name="Russo" type="Node3D" node_paths=PackedStringArray("russoSprite")]
+script = ExtResource("1_qqmo8")
+russoSprite = NodePath("RussoSprite")
+move_speed = 7.0
+
+[node name="RussoSprite" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.074815296, 0, 0, 0, 0.083549485, 0, 0, 0, 1, 0, 0.9274478, 0)
+sprite_frames = SubResource("SpriteFrames_1m7a0")
+animation = &"walk"
+frame = 2
+frame_progress = 0.53241456

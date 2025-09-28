@@ -31,7 +31,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_player_in = false
 		canBeFound = false
 		_unlocked = true
-		Globals.unlocked.emit(unlock_message)
+		Globals.unlocked.emit(puzzleUnlockLevel)
 		FlowManager.unlock_next_color()
 
 func onPuzzleCompleted(puzzleLevel : int):

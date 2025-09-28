@@ -1,15 +1,21 @@
-[gd_scene load_steps=20 format=3 uid="uid://w1iwff1yggpr"]
+[gd_scene load_steps=26 format=3 uid="uid://w1iwff1yggpr"]
 
+[ext_resource type="Script" uid="uid://ck4t1kma0il28" path="res://levels/level_manager.gd" id="1_1e5mj"]
 [ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_yv058"]
+[ext_resource type="PackedScene" uid="uid://dylva7hsisile" path="res://Player/russo.tscn" id="2_xt2po"]
 [ext_resource type="Texture2D" uid="uid://dbdss0cywefdm" path="res://wallpaper.png" id="3_xokmy"]
 [ext_resource type="Texture2D" uid="uid://c0mb2grv1vm5k" path="res://CatumetGamesFurniture.png" id="4_atdb8"]
 [ext_resource type="Shader" uid="uid://do0ho41oss6m2" path="res://levels/windowRain.gdshader" id="4_senj2"]
 [ext_resource type="Script" uid="uid://dpsx0yfrpe1js" path="res://Unlockable.gd" id="5_1s8hg"]
-[ext_resource type="Script" uid="uid://cph251i7ro8gt" path="res://UnlockUI.gd" id="6_0eda1"]
 [ext_resource type="Texture2D" uid="uid://pmfkd3tdgwux" path="res://assets/Mona_Lisa.jpg" id="7_14t7h"]
 [ext_resource type="PackedScene" uid="uid://5x7sodyd2cpj" path="res://Player/player.tscn" id="7_t4kv4"]
 [ext_resource type="PackedScene" uid="uid://cjn3tu0mw2ia5" path="res://flow-game/main-game.tscn" id="8_senj2"]
 [ext_resource type="Texture2D" uid="uid://b36u7nders6ej" path="res://assets/The_Anguished_Man_painting.jpg" id="8_suu7y"]
+[ext_resource type="Texture2D" uid="uid://c1hfm1iyn513o" path="res://assets/clues/burnt_photgrapgh.png" id="10_1e5mj"]
+[ext_resource type="Texture2D" uid="uid://br0isrh4i1hin" path="res://assets/clues/epitome.png" id="11_a6rvv"]
+[ext_resource type="Texture2D" uid="uid://de5b1purna1op" path="res://assets/clues/glass_shard.png" id="12_xt2po"]
+[ext_resource type="Texture2D" uid="uid://cpkdtsip3olea" path="res://assets/clues/locksmith_receipt.png" id="13_4sc5s"]
+[ext_resource type="Texture2D" uid="uid://crtkn6mnwqdxt" path="res://assets/clues/locket_2.png" id="14_353yn"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
 
@@ -50,7 +56,14 @@ adjustment_saturation = 0.01
 [sub_resource type="BoxShape3D" id="BoxShape3D_kek77"]
 size = Vector3(8.982971, 1, 18.67694)
 
-[node name="Node3D" type="Node3D"]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("textures", "background", "newColorUnlock")]
+script = ExtResource("1_1e5mj")
+textures = [NodePath("UI/Tome"), NodePath("UI/BurntPhoto"), NodePath("UI/Locksmith"), NodePath("UI/GlassShard")]
+background = NodePath("Background")
+newColorUnlock = NodePath("UI/ColorUnlocked")
+
+[node name="Russo" parent="." instance=ExtResource("2_xt2po")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77257174, 0.26651263, -1.7353312)
 
 [node name="Player" parent="." instance=ExtResource("7_t4kv4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18786442, -1.3750435)
@@ -393,25 +406,120 @@ shaded = true
 texture = ExtResource("8_suu7y")
 region_rect = Rect2(1701.1052, 1140.3295, 548.8948, 548.1876)
 
+[node name="Background" type="ColorRect" parent="."]
+visible = false
+show_behind_parent = true
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0.689)
+
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="TopBar" type="Control" parent="UI"]
-layout_mode = 3
-anchor_top = 0.045
-anchor_right = 1.0020001
-anchor_bottom = 0.045
-offset_left = 2.0
-offset_top = -0.16000175
-offset_right = -0.30407715
-offset_bottom = -0.16000175
+[node name="BurntPhoto" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -83.0
+offset_right = 83.0
+offset_bottom = 83.0
 grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("10_1e5mj")
+expand_mode = 1
 
-[node name="UnlockLabel" type="Label" parent="UI" groups=["unlock_ui"]]
-modulate = Color(1, 1, 1, 0)
-offset_right = 40.0
-offset_bottom = 23.0
+[node name="Tome" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -83.0
+offset_right = 83.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_a6rvv")
+expand_mode = 1
+
+[node name="GlassShard" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -83.0
+offset_right = 83.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("12_xt2po")
+expand_mode = 1
+
+[node name="Locksmith" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -83.0
+offset_right = 83.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_4sc5s")
+expand_mode = 1
+
+[node name="Locket" type="TextureRect" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.0
+offset_top = -83.0
+offset_right = 83.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("14_353yn")
+expand_mode = 1
+
+[node name="ColorUnlocked" type="Label" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 11
+theme_override_font_sizes/font_size = 41
+text = "New Color Unlocked
+Press [Tab]"
 horizontal_alignment = 1
-script = ExtResource("6_0eda1")
+vertical_alignment = 1
 
 [node name="MainGame" parent="." instance=ExtResource("8_senj2")]
 visible = false

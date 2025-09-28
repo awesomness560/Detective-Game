@@ -1,3 +1,6 @@
 extends Node
 
-signal unlocked(text : String)
+signal unlocked(whichOne : int)
+signal clueTime(yesOrNo : bool)
+
+var canMove : bool = true

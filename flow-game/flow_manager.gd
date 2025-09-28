@@ -112,6 +112,7 @@ func unlock_next_color():
 		print("Unlocking color index: ", currentColorIndex, " (", colorOrder[currentColorIndex], ")")
 		update_visible_origins()
 	else:
+		puzzle_completed.emit(4)
 		print("All colors already unlocked!")
 
 func check_puzzle_completion():

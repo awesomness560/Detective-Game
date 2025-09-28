@@ -1,7 +1,47 @@
-[gd_scene load_steps=6 format=3 uid="uid://5x7sodyd2cpj"]
+[gd_scene load_steps=15 format=3 uid="uid://5x7sodyd2cpj"]
 
 [ext_resource type="Script" uid="uid://3ktvrkrtvfb5" path="res://Player/player.gd" id="1_2slf2"]
 [ext_resource type="Texture2D" uid="uid://3dvf4dj6pdp3" path="res://guy2.png" id="1_3oco4"]
+[ext_resource type="Texture2D" uid="uid://d0kdli504we87" path="res://assets/mc-walk/walk1.png" id="2_x3vf3"]
+[ext_resource type="Texture2D" uid="uid://b7albd0dqcoa8" path="res://assets/mc-walk/walk2.png" id="3_apopc"]
+[ext_resource type="Texture2D" uid="uid://bnx0ve2vtt57" path="res://assets/mc-walk/walk3.png" id="4_5htga"]
+[ext_resource type="Texture2D" uid="uid://d33b7kenwrad8" path="res://assets/mc-walk/walk4.png" id="5_p5o4e"]
+[ext_resource type="Texture2D" uid="uid://xfmtxrvl3pd7" path="res://assets/mc-walk/walk5.png" id="6_gu6f8"]
+[ext_resource type="Texture2D" uid="uid://blmw2esqp1ato" path="res://assets/mc-walk/walk6.png" id="7_dkpta"]
+[ext_resource type="Texture2D" uid="uid://dnfvy3xvmapjy" path="res://assets/mc-walk/walk7.png" id="8_lfmf2"]
+[ext_resource type="Texture2D" uid="uid://baktdbahcpj35" path="res://assets/mc-walk/walk8.png" id="9_pisgm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b1ygp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x3vf3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_apopc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_5htga")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_p5o4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gu6f8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_dkpta")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_lfmf2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_pisgm")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jco6x"]
 transparency = 1
@@ -13,11 +53,19 @@ material = SubResource("StandardMaterial3D_jco6x")
 [sub_resource type="BoxShape3D" id="BoxShape3D_4ntmi"]
 size = Vector3(1, 1.9851074, 1)
 
-[node name="Player" type="Node3D" groups=["player"]]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("characterSprite") groups=["player"]]
 script = ExtResource("1_2slf2")
+characterSprite = NodePath("CharacterSprite")
+
+[node name="CharacterSprite" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.07426087, 0, 0, 0, 0.07426087, 0, 0, 0, 1, 0, 0.9407308, 0)
+sprite_frames = SubResource("SpriteFrames_b1ygp")
+frame = 7
+frame_progress = 0.32924992
 
 [node name="Character" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.55944264, 0, 0, 0, 2.0214114, 0, 0, 0, 1, 0, 1.0293868, 0)
+visible = false
 layers = 9
 mesh = SubResource("QuadMesh_2slf2")
 
