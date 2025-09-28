@@ -22,6 +22,9 @@ func foundSomething(thing : int):
 		finalUnlockSequence()
 		return
 	Globals.clueTime.emit(true)
+	#var playback = music.get_playback_position()
+	#music.pitch_scale -= 0.1
+	#music.seek(playback)
 	textures[thing].visible = true
 	background.show()
 	currentConvo = thing
@@ -43,7 +46,7 @@ func finalUnlockSequence():
 	procederalMat.sky_top_color = Color.RED
 	var russo : Node3D = get_tree().get_first_node_in_group("russo")
 	russo.global_position.x = russoFinalLocation.global_position.x
-	AudioServer.set_bus_effect_enabled(1, 1, true)
+	AudioServer.set_bus_effect_enabled(1, 0, true)
 	music.pitch_scale = 0.5
 	Globals.final.emit()
 	pass

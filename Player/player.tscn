@@ -53,9 +53,12 @@ material = SubResource("StandardMaterial3D_jco6x")
 [sub_resource type="BoxShape3D" id="BoxShape3D_4ntmi"]
 size = Vector3(1, 1.9851074, 1)
 
-[node name="Player" type="Node3D" node_paths=PackedStringArray("characterSprite") groups=["player"]]
+[node name="Player" type="Node3D" node_paths=PackedStringArray("characterSprite", "camera") groups=["player"]]
 script = ExtResource("1_2slf2")
 characterSprite = NodePath("CharacterSprite")
+camera = NodePath("Camera3D")
+character_min_x = -11.5
+character_max_x = 30.0
 
 [node name="CharacterSprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.07426087, 0, 0, 0, 0.07426087, 0, 0, 0, 1, 0, 0.9407308, 0)
