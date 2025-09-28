@@ -1,50 +1,42 @@
 extends Node3D
+@export var speed : int = 7
+@export var characterSprite : AnimatedSprite3D
+@export var camera : Camera3D
 
-@export var speed : float = 7.0
-@export var stair_climb_speed : float = 3.0   # how fast to slide up stairs
-@export var ground_y : float = 0.0            # floor height
+# Character bounds
+@export var character_min_x : float = -10.0
+@export var character_max_x : float = 10.0
 
-var current_stair: Area3D = null              # reference to stair we are inside
+# Camera bounds
+@export var camera_min_x : float = -15.0
+@export var camera_max_x : float = 15.0
+
+var isMoving : bool = false
 
 func _process(delta: float) -> void:
-	var move_vec = Vector3.ZERO
-
-	# Basic movement on X/Z
-	if Input.is_action_pressed("move_right"):
-		move_vec.x += 1
-	if Input.is_action_pressed("move_left"):
-		move_vec.x -= 1
-	if Input.is_action_pressed("move_forward"):
-		move_vec.z -= 1
-	if Input.is_action_pressed("move_backward"):
-		move_vec.z += 1
-
-	# Normalize so diagonal isn’t faster
-	if move_vec.length() > 0:
-		move_vec = move_vec.normalized() * speed * delta
-
-	# Apply horizontal movement
-	global_position.x += move_vec.x
-	global_position.z += move_vec.z
-
-	# --- Handle stairs ---
-	if current_stair:
-		# Use the stair slope property to calculate Y
-		var local_pos = current_stair.get_parent().to_local(global_position)
-		var slope = current_stair.get_parent().get("slope")
-		var target_y = local_pos.x * slope
-		global_position.y = lerp(global_position.y, target_y, stair_climb_speed * delta)
+	var new_x = global_position.x
+	
+	if Input.is_action_pressed("move_right") and Globals.canMove:
+		new_x += speed * delta
+		isMoving = true
+		characterSprite.flip_h = false
+	elif Input.is_action_pressed("move_left") and Globals.canMove:
+		new_x -= speed * delta
+		isMoving = true
+		characterSprite.flip_h = true
 	else:
-		# Stay at ground level when no stairs
-		global_position.y = lerp(global_position.y, ground_y, stair_climb_speed * delta)
-
-
-# --- Signals from Area3D (stairs) ---
-func _on_stair_area_area_entered(area: Area3D) -> void:
-	# Player must have its own Area3D to detect overlaps
-	if area.is_in_group("stairs"):
-		current_stair = area
-
-func _on_stair_area_area_exited(area: Area3D) -> void:
-	if area == current_stair:
-		current_stair = null
+		isMoving = false
+	
+	# Apply character bounds
+	new_x = clamp(new_x, character_min_x, character_max_x)
+	global_position.x = new_x
+	
+	# Apply camera bounds (independent of character position)
+	if camera:
+		var camera_x = clamp(camera.global_position.x, camera_min_x, camera_max_x)
+		camera.global_position.x = camera_x
+	
+	if isMoving:
+		characterSprite.play("default")
+	else:
+		characterSprite.stop()

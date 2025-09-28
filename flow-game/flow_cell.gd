@@ -9,7 +9,7 @@ enum CELL_TYPE {
 enum COLORS {
 	BLACK,
 	BLUE,
-	GREEN,
+	PURPLE,
 	RED,
 	YELLOW
 }
@@ -69,8 +69,8 @@ func getActualColor() -> Color:
 			return Color.BLACK
 		COLORS.BLUE:
 			return Color.BLUE
-		COLORS.GREEN:
-			return Color.WEB_GREEN
+		COLORS.PURPLE:
+			return Color.MEDIUM_PURPLE
 		COLORS.RED:
 			return Color.ORANGE_RED
 		COLORS.YELLOW:
