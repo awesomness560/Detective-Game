@@ -9,13 +9,18 @@ class_name Russo
 var player : Node3D
 var is_clue_time : bool = false
 var isMoving : bool = false
+var isFinal : bool = false
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	Globals.clueTime.connect(clueTime)
+	Globals.final.connect(final)
+
+func final():
+	isFinal = true
 
 func _process(delta: float) -> void:
-	if not player:
+	if not player or isFinal:
 		return
 	
 	var distance_x = abs(player.global_position.x - global_position.x)
@@ -23,8 +28,10 @@ func _process(delta: float) -> void:
 	if distance_x > follow_distance or (isMoving and distance_x > stop_distance):
 		if player.global_position.x > global_position.x:
 			global_position.x += move_speed * delta
+			russoSprite.flip_h = false
 		else:
 			global_position.x -= move_speed * delta
+			russoSprite.flip_h = true
 		isMoving = true
 	else:
 		isMoving = false

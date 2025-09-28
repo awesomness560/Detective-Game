@@ -44,13 +44,14 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="Russo" type="Node3D" node_paths=PackedStringArray("russoSprite")]
+[node name="Russo" type="Node3D" node_paths=PackedStringArray("russoSprite") groups=["russo"]]
 script = ExtResource("1_qqmo8")
 russoSprite = NodePath("RussoSprite")
 move_speed = 7.0
 
 [node name="RussoSprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.074815296, 0, 0, 0, 0.083549485, 0, 0, 0, 1, 0, 0.9274478, 0)
+shaded = true
 sprite_frames = SubResource("SpriteFrames_1m7a0")
 animation = &"walk"
 frame = 2

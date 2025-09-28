@@ -5,6 +5,13 @@ extends Node3D
 @export var textures : Array[TextureRect]
 @export var background : ColorRect
 @export var newColorUnlock : Label
+@export var normalPainting : Sprite3D
+@export var screamingPainting : Sprite3D
+@export var worldEnvironment : WorldEnvironment
+@export var russoFinalLocation : Node3D
+@export var music : AudioStreamPlayer
+
+var currentConvo : int = 0
 
 func _ready() -> void:
 	Globals.unlocked.connect(foundSomething)
@@ -17,15 +24,28 @@ func foundSomething(thing : int):
 	Globals.clueTime.emit(true)
 	textures[thing].visible = true
 	background.show()
+	currentConvo = thing
 	#Globals.canMove = false
-	#match thing:
-		#0:
+	match thing:
+		0:
 			#runDialogue("intro")
+			pass
+		1:
+			screamingPainting.show()
+			normalPainting.hide()
 	await get_tree().create_timer(2).timeout
 	
 	onTimelineEnded()
 
 func finalUnlockSequence():
+	#dialogue
+	var procederalMat : ProceduralSkyMaterial = worldEnvironment.environment.sky.sky_material as ProceduralSkyMaterial
+	procederalMat.sky_top_color = Color.RED
+	var russo : Node3D = get_tree().get_first_node_in_group("russo")
+	russo.global_position.x = russoFinalLocation.global_position.x
+	AudioServer.set_bus_effect_enabled(1, 1, true)
+	music.pitch_scale = 0.5
+	Globals.final.emit()
 	pass
 
 func runDialogue(dialogue : String):
@@ -35,6 +55,9 @@ func runDialogue(dialogue : String):
 	Dialogic.start(dialogue)
 
 func onTimelineEnded():
+	if currentConvo == 4:
+		return
+	
 	for texture in textures:
 		texture.hide()
 	
@@ -51,3 +74,4 @@ func onTimelineEnded():
 	newColorUnlock.hide()
 	
 	Globals.clueTime.emit(false)
+	Globals.convoFinished.emit(currentConvo)

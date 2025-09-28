@@ -1,21 +1,36 @@
-[gd_scene load_steps=26 format=3 uid="uid://w1iwff1yggpr"]
+[gd_scene load_steps=35 format=3 uid="uid://w1iwff1yggpr"]
 
 [ext_resource type="Script" uid="uid://ck4t1kma0il28" path="res://levels/level_manager.gd" id="1_1e5mj"]
 [ext_resource type="Material" uid="uid://dijlsdnxebe6e" path="res://dark-wood/dark_wood.tres" id="1_yv058"]
+[ext_resource type="AudioStream" uid="uid://frm8voemoi4e" path="res://assets/sounds/murder-mystery-spooky-midsomer-orchestral-instrumental-theme-147009(1).mp3" id="2_4sc5s"]
 [ext_resource type="PackedScene" uid="uid://dylva7hsisile" path="res://Player/russo.tscn" id="2_xt2po"]
+[ext_resource type="Script" uid="uid://c2vxelkswiqbs" path="res://audioScripts/whispers.gd" id="3_353yn"]
+[ext_resource type="AudioStream" uid="uid://isphu1abala4" path="res://assets/sounds/whisper5-94457.mp3" id="3_gfavo"]
 [ext_resource type="Texture2D" uid="uid://dbdss0cywefdm" path="res://wallpaper.png" id="3_xokmy"]
 [ext_resource type="Texture2D" uid="uid://c0mb2grv1vm5k" path="res://CatumetGamesFurniture.png" id="4_atdb8"]
 [ext_resource type="Shader" uid="uid://do0ho41oss6m2" path="res://levels/windowRain.gdshader" id="4_senj2"]
+[ext_resource type="AudioStream" uid="uid://dlacjtqjvbamt" path="res://assets/sounds/whispers-and-screams-87177.mp3" id="4_uei76"]
 [ext_resource type="Script" uid="uid://dpsx0yfrpe1js" path="res://Unlockable.gd" id="5_1s8hg"]
+[ext_resource type="AudioStream" uid="uid://c86pyfk00w6nb" path="res://assets/sounds/075283_quotbehind-youquot-whisper-86744.mp3" id="5_o3iio"]
 [ext_resource type="Texture2D" uid="uid://pmfkd3tdgwux" path="res://assets/Mona_Lisa.jpg" id="7_14t7h"]
 [ext_resource type="PackedScene" uid="uid://5x7sodyd2cpj" path="res://Player/player.tscn" id="7_t4kv4"]
 [ext_resource type="PackedScene" uid="uid://cjn3tu0mw2ia5" path="res://flow-game/main-game.tscn" id="8_senj2"]
 [ext_resource type="Texture2D" uid="uid://b36u7nders6ej" path="res://assets/The_Anguished_Man_painting.jpg" id="8_suu7y"]
 [ext_resource type="Texture2D" uid="uid://c1hfm1iyn513o" path="res://assets/clues/burnt_photgrapgh.png" id="10_1e5mj"]
 [ext_resource type="Texture2D" uid="uid://br0isrh4i1hin" path="res://assets/clues/epitome.png" id="11_a6rvv"]
+[ext_resource type="Script" uid="uid://cixijeywv8u5v" path="res://levels/lights.gd" id="12_uei76"]
 [ext_resource type="Texture2D" uid="uid://de5b1purna1op" path="res://assets/clues/glass_shard.png" id="12_xt2po"]
 [ext_resource type="Texture2D" uid="uid://cpkdtsip3olea" path="res://assets/clues/locksmith_receipt.png" id="13_4sc5s"]
 [ext_resource type="Texture2D" uid="uid://crtkn6mnwqdxt" path="res://assets/clues/locket_2.png" id="14_353yn"]
+[ext_resource type="PackedScene" uid="uid://t6rpp6sdndve" path="res://assets/door-closed/door_closed.glb" id="23_o3iio"]
+[ext_resource type="PackedScene" uid="uid://cgu483ns0dk6j" path="res://assets/door-open/door_open.glb" id="24_xigk4"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_xcwmv"]
+streams_count = 3
+stream_0/stream = ExtResource("3_gfavo")
+stream_1/stream = ExtResource("4_uei76")
+stream_2/stream = ExtResource("5_o3iio")
+stream_2/weight = 0.3
 
 [sub_resource type="BoxMesh" id="BoxMesh_1exhc"]
 
@@ -50,17 +65,39 @@ sky_material = SubResource("ProceduralSkyMaterial_senj2")
 
 [sub_resource type="Environment" id="Environment_3dcgm"]
 background_mode = 2
+background_energy_multiplier = 0.5
 sky = SubResource("Sky_ksxe6")
 adjustment_saturation = 0.01
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kek77"]
 size = Vector3(8.982971, 1, 18.67694)
 
-[node name="Node3D" type="Node3D" node_paths=PackedStringArray("textures", "background", "newColorUnlock")]
+[node name="Node3D" type="Node3D" node_paths=PackedStringArray("textures", "background", "newColorUnlock", "normalPainting", "screamingPainting", "worldEnvironment", "russoFinalLocation", "music")]
 script = ExtResource("1_1e5mj")
 textures = [NodePath("UI/Tome"), NodePath("UI/BurntPhoto"), NodePath("UI/Locksmith"), NodePath("UI/GlassShard")]
 background = NodePath("Background")
 newColorUnlock = NodePath("UI/ColorUnlocked")
+normalPainting = NodePath("Painting")
+screamingPainting = NodePath("ScreamingPainting")
+worldEnvironment = NodePath("WorldEnvironment")
+russoFinalLocation = NodePath("RussoTeleportLocation")
+music = NodePath("Audio/Music")
+
+[node name="Audio" type="Node" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("2_4sc5s")
+autoplay = true
+bus = &"Music"
+
+[node name="Whispers" type="AudioStreamPlayer" parent="Audio" node_paths=PackedStringArray("timer")]
+stream = SubResource("AudioStreamRandomizer_xcwmv")
+script = ExtResource("3_353yn")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="Audio/Whispers"]
+wait_time = 3.0
+one_shot = true
 
 [node name="Russo" parent="." instance=ExtResource("2_xt2po")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.77257174, 0.26651263, -1.7353312)
@@ -73,13 +110,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.18786442, -1.3750435)
 [node name="Doorway" type="Node3D" parent="Environment"]
 
 [node name="MeshInstance3D7" type="MeshInstance3D" parent="Environment/Doorway"]
-transform = Transform3D(-5.4767537e-07, -0.4296626, 0, 12.52935, -1.8781147e-08, 0, 0, 0, 8.777189, 2.630663, 10.045976, 0)
+transform = Transform3D(-5.4767537e-07, -0.4296626, 0, 12.52935, -1.8781147e-08, 0, 0, 0, 8.777189, 2.631, 9.549, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Environment/Doorway"]
+transform = Transform3D(6.845284e-14, 1.8781142e-08, -56.717743, 12.529349, -1.878114e-08, 0, -5.476753e-07, -0.42966244, -2.4792114e-06, 10.610184, -0.73199177, 2.3981538)
 mesh = SubResource("BoxMesh_1exhc")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("1_yv058")
 
 [node name="MeshInstance3D8" type="MeshInstance3D" parent="Environment/Doorway"]
-transform = Transform3D(-2.8855112e-07, -0.4296626, 0, 6.6012793, -1.8781147e-08, 0, 0, 0, 0.8689654, 2.630663, 2.2332106, -0.5910971)
+transform = Transform3D(-2.8855112e-07, -0.4296626, 0, 6.6012793, -1.8781147e-08, 0, 0, 0, 0.57066447, 2.630663, 2.2332106, -0.32252625)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Environment/Doorway"]
+transform = Transform3D(-2.8855112e-07, -0.4296626, 0, 6.6012793, -1.8781147e-08, 0, 0, 0, 0.57066447, 2.630663, 2.2332106, -2.5794997)
 mesh = SubResource("BoxMesh_1exhc")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("1_yv058")
@@ -99,8 +148,20 @@ mesh = SubResource("BoxMesh_1exhc")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("1_yv058")
 
+[node name="MeshInstance3D9" type="MeshInstance3D" parent="Environment/Doorway2"]
+transform = Transform3D(-5.4767537e-07, -0.4296626, 0, 12.52935, -1.8781147e-08, 0, 0, 0, 8.777189, 1.1355133, 9.720872, 0)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
+[node name="MeshInstance3D10" type="MeshInstance3D" parent="Environment/Doorway2"]
+transform = Transform3D(-2.8855112e-07, -0.4296626, 0, 6.6012793, -1.8781147e-08, 0, 0, 0, 0.8689654, 1.1355133, 2.2332106, -0.5910971)
+mesh = SubResource("BoxMesh_1exhc")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("1_yv058")
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 0, 0)
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 0, 0, -0.30822945)
 mesh = SubResource("BoxMesh_1exhc")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_yv058")
@@ -112,7 +173,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_yv058")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 24.848131, 0, 0)
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 24.848131, 0, -0.30822945)
 layers = 3
 mesh = SubResource("BoxMesh_1exhc")
 skeleton = NodePath("../..")
@@ -126,7 +187,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_yv058")
 
 [node name="MeshInstance3D5" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 49.40213, 0, 0)
+transform = Transform3D(25.080317, 0, 0, 0, 0.4296626, 0, 0, 0, 4.827832, 49.40213, 0, -0.30822945)
 mesh = SubResource("BoxMesh_1exhc")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("1_yv058")
@@ -200,7 +261,9 @@ surface_material_override/0 = SubResource("ShaderMaterial_suu7y")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3dcgm")
 
-[node name="Lights" type="Node" parent="."]
+[node name="Lights" type="Node" parent="." node_paths=PackedStringArray("allLights")]
+script = ExtResource("12_uei76")
+allLights = [NodePath("OmniLight3D"), NodePath("OmniLight3D2"), NodePath("OmniLight3D3"), NodePath("OmniLight3D4"), NodePath("../Desk2/OmniLight3D")]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(0.9986029, -0.013155414, 0.05117762, 0, 0.96851367, 0.24896036, -0.052841403, -0.24861254, 0.9671606, 10.114066, 3.044477, 1.4162049)
@@ -251,7 +314,7 @@ shape = SubResource("BoxShape3D_kek77")
 [node name="PromptLabel" type="Label3D" parent="Shelf/Unlockable"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
 visible = false
-text = "Press E to Unlock"
+text = "Press E to Search"
 font_size = 147
 
 [node name="Shelf2" type="Sprite3D" parent="."]
@@ -290,9 +353,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.14810562, 0, 8.83847)
 shape = SubResource("BoxShape3D_kek77")
 
 [node name="PromptLabel" type="Label3D" parent="Chair/Unlockable"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, -0.026640892)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.035758972, 5.1091003, 7.142313)
 visible = false
-text = "Press E to Unlock"
+text = "Press E to Search"
 font_size = 147
 
 [node name="Chair2" type="Sprite3D" parent="."]
@@ -362,7 +425,7 @@ region_rect = Rect2(933.0967, 2254.451, 292.64673, 481.0171)
 [node name="OmniLight3D" type="OmniLight3D" parent="Desk2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6570816, 0.42649066)
 light_color = Color(0.91764706, 0.78431374, 0.12156863, 1)
-light_energy = 1.495
+light_energy = 0.5
 light_indirect_energy = 6.443
 light_cull_mask = 4294967290
 omni_range = 13.404
@@ -371,7 +434,7 @@ omni_range = 13.404
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6570816, 3.6516032)
 layers = 8
 light_color = Color(0.91764706, 0.78431374, 0.12156863, 1)
-light_energy = 1.495
+light_energy = 0.5
 light_indirect_energy = 6.443
 light_cull_mask = 4294967294
 omni_range = 13.404
@@ -523,3 +586,12 @@ vertical_alignment = 1
 
 [node name="MainGame" parent="." instance=ExtResource("8_senj2")]
 visible = false
+
+[node name="door_closed" parent="." instance=ExtResource("23_o3iio")]
+transform = Transform3D(-3.934025e-09, 0, -0.09, 0, 0.09, 0, 0.09, 0, -3.934025e-09, 30.45242, 0.17290807, -1.6366987)
+
+[node name="door_open" parent="." instance=ExtResource("24_xigk4")]
+transform = Transform3D(-3.934025e-09, 0, -0.09, 0, 0.09, 0, 0.09, 0, -3.934025e-09, 2.5822184, 0, -4.05371)
+
+[node name="RussoTeleportLocation" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.626932, 1.2033128, -1.5374006)

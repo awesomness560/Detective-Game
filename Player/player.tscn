@@ -59,6 +59,8 @@ characterSprite = NodePath("CharacterSprite")
 
 [node name="CharacterSprite" type="AnimatedSprite3D" parent="."]
 transform = Transform3D(0.07426087, 0, 0, 0, 0.07426087, 0, 0, 0, 1, 0, 0.9407308, 0)
+layers = 3
+shaded = true
 sprite_frames = SubResource("SpriteFrames_b1ygp")
 frame = 7
 frame_progress = 0.32924992

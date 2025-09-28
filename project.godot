@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Detective Game"
-run/main_scene="uid://bxq6lb6nu53ob"
+run/main_scene="uid://w1iwff1yggpr"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -85,6 +85,7 @@ enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
 [global_group]
 
 player=""
+russo=""
 
 [input]
 
